@@ -13,15 +13,12 @@ app.use(session({
 	cookie: {secure: false}
 }));
 
+var UserController = require("./controllers/UserController");
+app.use("/users", UserController);
+
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-
-
-
-
-
-
 
 server.listen(3000, function(){
 	console.log("Listening on 3000!!")
