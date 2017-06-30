@@ -3,16 +3,21 @@ var express = require("express"),
 	bodyParser = require("body-parser"),
 	User = require("../models/User"),
 	session = require("express-session"),
-	bcrypt = require("bcrypt");
-var Twitter = require('twitter-node-client').Twitter;
+	bcrypt = require("bcrypt"),
+	twitter = require("../twitter_api.js");
 
 router.use(bodyParser.urlencoded({extended: true}));
 
 router.get("/", function(req, res) {
 	User.find(function(err, users) {
 		var renderObject = {users: users};
-		res.send(renderObject);
+		twitter.getSearch({'q':'#haiku','count': 10}, function(){} , function(data){
+			console.log(data);
+			res.send(data);
+		});
+		
 	})
+
 });
 
 router.get("/:id", function(req, res) {

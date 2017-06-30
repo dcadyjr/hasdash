@@ -22,5 +22,7 @@ var twitter = new Twitter(config);
 	// Get 10 tweets containing the hashtag haiku
 	//
 
-	twitter.getSearch({'q':'#haiku','count': 10}, error, success);
-	console.log(success);
+	// twitter.getSearch({'q':'#haiku','count': 10}, error, success);
+	// console.log(success);
+
+module.exports = twitter;
