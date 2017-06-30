@@ -11,18 +11,23 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.get("/", function(req, res) {
 	User.find(function(err, users) {
 		var renderObject = {users: users};
+
 		twitter.getSearch({'q':'#haiku','count': 10}, function(){} , function(data){
 			console.log(data);
 			res.send(data);
 		});
 		
+
+		// res.render("userlist", renderObject);
+
 	})
 
 });
 
 router.get("/:id", function(req, res) {
-	User.findById(req.params.id, function(err, user) {
-		res.send(user);
+	User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
+		var renderObject = {user: user};
+		res.render("dashboard", renderObject)
 	});
 });
 
