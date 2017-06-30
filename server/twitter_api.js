@@ -1,3 +1,4 @@
+require('dotenv').config();
 var Twitter = require('twitter-node-client').Twitter;
 
 var error = function (err, response, body) {
@@ -8,12 +9,18 @@ var error = function (err, response, body) {
 	};
 
 var config = {
-	"consumerKey": "OaC9roLurAEaPYCeirXpyFRnc",
-	"consumerSecret": "XL0n8y7dTjJJAlLfdjROBfKDumSr6ZHszQ5twzxG5noounP4VM",
-	"accessToken": "4697806730-3hJcdhauFI3lv9ElAWCwrdAymMel2QDaxqes9P2",
-	"accessTokenSecret": "Nv5bMizgiyNRrsnqL5SH4LJJGbr2JeN3DDSbMbELWX1te",
-	"callBackUrl":
+	"consumerKey": process.env.KEY,
+	"consumerSecret": process.env.SECRET,
+	"accessToken": process.env.TOKEN,
+	"accessTokenSecret": process.env.TOKENSECRET
+	// "callBackUrl"
 }
 
 var twitter = new Twitter(config);
 
+//
+	// Get 10 tweets containing the hashtag haiku
+	//
+
+	twitter.getSearch({'q':'#haiku','count': 10}, error, success);
+	console.log(success);

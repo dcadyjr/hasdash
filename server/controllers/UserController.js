@@ -4,6 +4,7 @@ var express = require("express"),
 	User = require("../models/User"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt");
+var Twitter = require('twitter-node-client').Twitter;
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -32,6 +33,7 @@ router.post("/", function(req, res) {
 	})
 });
 
+
 router.patch("/:id", function(req, res) {
 	if (req.body.password) {
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
@@ -56,5 +58,10 @@ router.delete("/:id", function(req, res) {
 		res.json("success");
 	});
 });
+
+// router.patch("/twitter", function(req, res){
+// 	twitter.getSearch({'q':'#haiku','count': 10}, error, success);
+// 		console.log(success);
+// });
 
 module.exports = router;
