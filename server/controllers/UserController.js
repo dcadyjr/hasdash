@@ -4,7 +4,11 @@ var express = require("express"),
 	User = require("../models/User"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt"),
-	twitter = require("../twitter_api.js");
+	twitter = require("../twitter_api.js"),
+	tweetToHTML = require('tweet-to-html');
+
+
+
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -12,8 +16,11 @@ router.get("/", function(req, res) {
 	User.find(function(err, users) {
 		var renderObject = {users: users};
 
-		twitter.getSearch({'q':'#haiku','count': 10}, function(){} , function(data){
-			console.log(data);
+		twitter.getSearch({'q':'#cubs','count': 10}, function(){} , function(data){
+			obj = JSON.parse(data);
+			// console.log(obj.statuses[0].extended_entities);
+			var results = tweetToHTML.parse(obj.statuses);
+			console.log(results[0].html);
 			res.send(data);
 		});
 		
