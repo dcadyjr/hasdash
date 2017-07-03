@@ -9,8 +9,11 @@ var express = require("express"),
 
 
 
-
 router.use(bodyParser.urlencoded({extended: true}));
+
+router.get("/register", function(req, res) {
+	res.render("register");
+});
 
 router.get("/", function(req, res) {
 	User.find(function(err, users) {
@@ -23,19 +26,27 @@ router.get("/", function(req, res) {
 			console.log(results[0].html);
 			res.send(data);
 		});
-		
-
 		// res.render("userlist", renderObject);
-
 	})
+});
 
+// just for testing since GET to /users/ no longer lists all the users
+router.get("/listofusers", function(req, res) {
+	User.find(function(err, users) {
+		var renderObject = {users: users};
+		res.json(renderObject);
+	});
 });
 
 router.get("/:id", function(req, res) {
-	User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
-		var renderObject = {user: user};
-		res.render("dashboard", renderObject)
-	});
+	if (req.session.loggedIn === true) {
+		User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
+			var renderObject = {user: user};
+			res.render("dashboard", renderObject)
+		});
+	} else {
+		res.redirect("/");
+	};
 });
 
 router.post("/", function(req, res) {
@@ -46,10 +57,12 @@ router.post("/", function(req, res) {
 			email: req.body.email
 		});
 		user.save();
-		res.send(user);
-	})
+		req.session.loggedIn = true;
+		req.session.myId = user._id;
+		// couldn't get this to redirect correctly so it's handled in main.js
+		res.json(user._id);
+	});
 });
-
 
 router.patch("/:id", function(req, res) {
 	if (req.body.password) {
