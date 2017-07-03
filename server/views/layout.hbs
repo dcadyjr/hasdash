@@ -8,6 +8,9 @@
 </head>
 <body>
 	<nav>
+	{{#if session.loggedIn}}
+	<p>You're logged in right now. <a href="/users/logout">Logout</a></p>
+	{{/if}}
 	</nav>
 	<div class="wrapper">
 		{{{ body }}}
