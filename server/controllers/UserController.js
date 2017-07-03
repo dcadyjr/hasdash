@@ -17,12 +17,20 @@ router.get("/", function(req, res) {
 		var renderObject = {users: users};
 
 		twitter.getSearch({'q':'#cubs','count': 10}, function(){} , function(data){
-			obj = JSON.parse(data);
-			// console.log(obj.statuses[0].extended_entities);
-			var results = tweetToHTML.parse(obj.statuses);
-			console.log(results[0].html);
+			
+			tweets = JSON.parse(data);
+
+			for (var i = 0; i < tweets.statuses.length; i++){
+
+			var userScreenName = tweets.statuses[i].user.screen_name;
+			var tweetId = tweets.statuses[i].id_str;
+			
+			console.log(userScreenName);
+			console.log(tweetId);
+			
+			}
 			res.send(data);
-		});
+		})
 		
 
 		// res.render("userlist", renderObject);
@@ -76,9 +84,6 @@ router.delete("/:id", function(req, res) {
 	});
 });
 
-// router.patch("/twitter", function(req, res){
-// 	twitter.getSearch({'q':'#haiku','count': 10}, error, success);
-// 		console.log(success);
-// });
+
 
 module.exports = router;
