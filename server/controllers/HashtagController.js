@@ -7,7 +7,7 @@ var express = require("express"),
 	bcrypt = require("bcrypt"),
 	twitter = require("../twitter_api.js"),
 	tweetToHTML = require('tweet-to-html'),//converts twitter's API tweet objects text property to HTML
-	request = require('request');
+	request = require('request');//for making request to twitter for the embed html
 
 
 router.use(bodyParser.urlencoded({extended: true}));
@@ -23,13 +23,17 @@ router.get("/search", function(req, res){
 			var userScreenName = tweets.statuses[i].user.screen_name;//variable to hold the UserScreenName
 			var tweetId = tweets.statuses[i].id_str;//variable to hold the tweet Id
 		
-			var url = "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Fedent%2Fstatus%2F860905721646338048";
- 			request(url, function(err, resp, body){
+			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%' + tweetId;
+			console.log(url);
+
+ 			request(url, function(err, resp, body){//request embed tweet info from twitter
  				if(err){
  					console.log(err);
  				}else {
- 			
- 					embedCode = JSON.parse(body);
+ 					console.log("Get response: " + resp.statusCode);
+
+ 					embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
+ 					console.log(embedCode);
  					console.log(embedCode.html);
  				}
 
