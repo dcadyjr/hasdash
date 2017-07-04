@@ -33,6 +33,7 @@
     "jsdom": "^11.0.0",
     "mongoose": "^4.11.0",
     "node-jsdom": "^3.1.5",
+    "request": "^2.81.0",
     "tweet-to-html": "^1.0.2",
     "twitter-node-client": "0.0.6"
   }
