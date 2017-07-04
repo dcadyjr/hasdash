@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 var Twitter = require('twitter-node-client').Twitter;
 
 var error = function (err, response, body) {
