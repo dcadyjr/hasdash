@@ -1,5 +1,21 @@
 console.log("connected")
 
+// toggle controls for the homepage (sign up / log in)
+$("#login-toggle").click(function(){
+	$("#signup-form").hide();
+	$("#login-form").show();
+	$(this).addClass("selected");
+	$("#signup-toggle").removeClass("selected");
+});
+$("#signup-toggle").click(function(){
+	$("#signup-form").show();
+	$("#login-form").hide();
+	$(this).addClass("selected");
+	$("#login-toggle").removeClass("selected");
+});
+
+
+
 // post to /users to make a new user
 $("#sign-up").click(function() {
 	var email = $("#signup-email-field").val();

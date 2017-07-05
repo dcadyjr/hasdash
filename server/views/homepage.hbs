@@ -2,23 +2,23 @@
 
 <div class="toggle-wrapper">
 	<div class="toggle-options">
-		<span>Sign up</span>
-		<span>Log in</span>
+		<span id="signup-toggle" class="selected">Sign up</span>
+		<span id="login-toggle">Log in</span>
 	</div>
+	<form id="signup-form">
+		<label for="signup-name-field">Name</label>
+		<input id="signup-name-field" placeholder="name" />
+		<label for="signup-email-field">Email</label>
+		<input id="signup-email-field" placeholder="email" />
+		<label for="signup-password-field">Password</label>
+		<input id="signup-password-field" placeholder="password" type="password" />
+		<button type="button" id="sign-up">Sign up</button>
+	</form>
+	<form id="login-form">
+		<label for="login-email-field">Email</label>
+		<input id="login-email-field" placeholder="email" />
+		<label for="login-password-field">Password</label>
+		<input id="login-password-field" placeholder="password" type="password" />
+		<button type="button" id="login-button">Log in</button>
+	</form>
 </div>
-
-
-<label for="signup-name-field">Name</label>
-<input id="signup-name-field" placeholder="name" />
-<label for="signup-email-field">Email</label>
-<input id="signup-email-field" placeholder="email" />
-<label for="signup-password-field">Password</label>
-<input id="signup-password-field" placeholder="password" type="password" />
-<button type="button" id="sign-up">Sign up</button>
-
-
-<label for="login-email-field">Email</label>
-<input id="login-email-field" placeholder="email" />
-<label for="login-password-field">Password</label>
-<input id="login-password-field" placeholder="password" type="password" />
-<button type="button" id="login-button">Log in</button>
