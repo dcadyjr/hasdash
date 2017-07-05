@@ -22,7 +22,6 @@ router.get("/register", function(req, res) {
 	res.render("register");
 });
 
-
 // login with information
 router.post("/login", function(req, res) {
 	User.findOne({email: req.body.email}, function(err, user) {
@@ -31,17 +30,31 @@ router.post("/login", function(req, res) {
 				if (match === true) {
 					req.session.loggedIn = true;
 					req.session.myId = user._id;
-					res.redirect("/users/" + user._id);
+					res.json({id: user._id});
 				} else {
-					res.send("password incorrect"); // password was wrong
+					res.json({error: "Password was incorrect"}); // password was wrong
 				}
 			});
 		} else {
-			res.send("couldn't find that email address") // email not found
+			res.json({error: "Couldn't find that email!"}) // email not found
 		};
 	});
 });
 
+// get account screen
+router.get("/account", function(req, res) {
+	if (req.session.loggedIn === true) {
+		User.findById(req.session.myId, function(err, user) {
+			var renderObject = {
+				user: user,
+				session: req.session
+			};
+			res.render("account", renderObject)
+		});
+	} else {
+		res.redirect("/");
+	};
+});
 
 router.get("/dashboard", function(req, res) {
 	User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
@@ -49,7 +62,6 @@ router.get("/dashboard", function(req, res) {
 		res.render("dashboard", renderObject)
 	});
 });
-
 
 router.get("/", function(req, res) {
 	if (req.session.loggedIn === true) {
@@ -100,7 +112,7 @@ router.post("/", function(req, res) {
 		req.session.loggedIn = true;
 		req.session.myId = user._id;
 		// couldn't get this to redirect correctly so it's handled in main.js
-		res.json(user._id);
+		res.json({id: user._id});
 	});
 });
 

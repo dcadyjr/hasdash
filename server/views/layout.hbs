@@ -6,11 +6,15 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
+<body{{#if session.loggedIn}} id="{{session.myId}}"{{/if}}>
 	<nav>
-	{{#if session.loggedIn}}
-	<p>You're logged in right now. <a href="/users/logout">Logout</a></p>
-	{{/if}}
+		<h1><a href="/">Hashdash!</a></h1>
+		{{#if session.loggedIn}}
+		<div class="nav-right">
+			<a href="/users/account">Account</a>
+			<a href="/users/logout">Logout</a>
+		</div>
+		{{/if}}
 	</nav>
 	<div class="wrapper">
 		{{{ body }}}

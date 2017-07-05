@@ -1,3 +1,78 @@
+@bg-color: rgba(115,201,255,0.15);
+@font-stack: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+
 body {
-	background-color: beige;
+	background-color: @bg-color;
+	font-family: @font-stack;
+	font-size: 1rem;
+}
+
+.intro {
+	font-size: 1.5rem;
+	text-align: center;
+	line-height: 1.5;
+}
+
+label {
+	display: block;
+	margin-bottom: .5rem;
+}
+
+input, button {
+	border-radius: 3px;
+	border: none;
+}
+
+input {
+	display: block;
+	margin-bottom: 1rem;
+	padding: .5rem;
+	border: 1px solid #e1e8ed;
+}
+
+button {
+	padding: .5rem 1rem;
+}
+
+.toggle-wrapper {
+	max-width: 30rem;
+    margin: 0 auto;
+    .toggle-options {
+	display: flex;
+	width: 100%;
+		span {
+			flex-grow: 1;
+			text-align: center;
+			cursor: pointer;
+			&:not(.selected) {
+				opacity: .5;
+			}
+		}
+	}
+	#login-form {
+		display: none;
+	}
+}
+
+nav, .wrapper {
+	width:100%;
+	margin: 1rem auto;
+	padding: .5rem;
+	max-width: 60rem;
+}
+
+nav {
+	h1 {
+		font-size: 1rem;
+		font-weight: normal;
+		display: inline-block;
+		margin: 0;
+	}
+	.nav-right {
+		float: right;
+		a {
+			display: inline-block;
+			margin-left: 2rem;
+		}
+	}
 }

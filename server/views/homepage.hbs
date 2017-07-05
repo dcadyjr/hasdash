@@ -1,3 +1,24 @@
-<p>Welcome to hashdash!</p>
+<p class="intro">Ever felt disappointed you can't follow hashtags on Twitter?<br>Now you can with Hashdash.</p>
 
-<p><a href="/users/login">login here</a></p>
+<div class="toggle-wrapper">
+	<div class="toggle-options">
+		<span id="signup-toggle" class="selected">Sign up</span>
+		<span id="login-toggle">Log in</span>
+	</div>
+	<form id="signup-form">
+		<label for="signup-name-field">Name</label>
+		<input id="signup-name-field" placeholder="Name" />
+		<label for="signup-email-field">Email</label>
+		<input id="signup-email-field" placeholder="Email" />
+		<label for="signup-password-field">Password</label>
+		<input id="signup-password-field" placeholder="Password" type="password" />
+		<button type="button" id="sign-up">Sign up</button>
+	</form>
+	<form id="login-form">
+		<label for="login-email-field">Email</label>
+		<input id="login-email-field" placeholder="Email" />
+		<label for="login-password-field">Password</label>
+		<input id="login-password-field" placeholder="Password" type="password" />
+		<button type="button" id="login-button">Log in</button>
+	</form>
+</div>
