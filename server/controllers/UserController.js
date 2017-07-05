@@ -4,19 +4,6 @@ var express = require("express"),
 	User = require("../models/User"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt");
-	
-
-router.use(bodyParser.urlencoded({extended: true}));
-
-
-router.get("/", function(req, res) {
-
-	User.find(function(err, users) {
-		var renderObject = {users: users};
-
-		res.render("userlist", renderObject);
-	})
-
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -63,10 +50,6 @@ router.get("/dashboard", function(req, res) {
 	});
 });
 
-router.get("/:id", function(req, res) {
-	User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
-		var renderObject = {user: user};
-		res.render("dashboard", renderObject)
 
 router.get("/", function(req, res) {
 	if (req.session.loggedIn === true) {
@@ -75,15 +58,6 @@ router.get("/", function(req, res) {
 				users: users,
 				session: req.session
 			};
-
-			twitter.getSearch({'q':'#cubs','count': 10}, function(){} , function(data){
-				obj = JSON.parse(data);
-				// console.log(obj.statuses[0].extended_entities);
-				var results = tweetToHTML.parse(obj.statuses);
-				console.log(results[0].html);
-				res.send(data);
-			});
-			// res.render("userlist", renderObject);
 		})
 	} else {
 		res.redirect("/");
@@ -154,7 +128,5 @@ router.delete("/:id", function(req, res) {
 		res.json("success");
 	});
 });
-
-
 
 module.exports = router;

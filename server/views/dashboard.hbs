@@ -1,13 +1,21 @@
-<p>Welcome back, {{user._id}}</p>
+{{!-- <p>Welcome back, {{user._id}}</p> --}}
 <p>User dashboard showing tweets and instagrams</p>
 <p>This user's hashtags:</p>
-<ul>
+{{!-- <ul>
 	{{#each user.hashtags}}
 	<li>{{this.name}}</li>
 	{{/each}}
-</ul>
+</ul> --}}
 
 <form action="http://localhost:3000/hashtags/search" method="POST">
 	<input name="tag" placeholder="#hashtag"/>
 	<button>submit</button>
 </form>
+
+ 	<ul>
+ 		{{#each tweets}}
+ 		<li>{{{this}}}</li>
+ 		{{/each}}
+ 	</ul>
+
+ 	

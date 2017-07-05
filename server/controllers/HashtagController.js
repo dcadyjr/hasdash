@@ -6,15 +6,16 @@ var express = require("express"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt"),
 	twitter = require("../twitter_api.js"),
-	tweetToHTML = require('tweet-to-html'),//converts twitter's API tweet objects text property to HTML
+	// tweetToHTML = require('tweet-to-html'),//converts twitter's API tweet objects text property to HTML
 	request = require('request');//for making request to twitter for the embed html
 
 
 router.use(bodyParser.urlencoded({extended: true}));
 
 router.post("/search", function(req, res){
-	
-	twitter.getSearch({'q': "#" + req.body.tag,'count': 10}, function(){} , function(data){//this is the search to get tweet data.
+	var embedHTML = [];
+
+	twitter.getSearch({'q': "#" + req.body.tag,'count': 5}, function(){} , function(data){//this is the search to get tweet data.
 			
 		tweets = JSON.parse(data);//this allows us to dig into the tweet data
 
@@ -29,17 +30,24 @@ router.post("/search", function(req, res){
 
  			request(url, function(err, resp, body){//request embed tweet info from twitter
  				if(err){
- 					console.log(err);
+ 					// console.log(err);
  				}else {
 
- 					embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
+ 				var embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
  					
- 					var embedHTML = embedCode.html;
- 					console.log(embedCode.html);
+ 					embedHTML.push(embedCode.html);
+
+ 					if (embedHTML.length === 5){
+ 					var html = {tweets: embedHTML};
+					res.render("dashboard", html);
+				}
+					// console.log(embedHTML);
+
+ 					// console.log(embedCode.html);
  				}
  			})
 		}
-			res.send(data);
+			
 	})
 })
 

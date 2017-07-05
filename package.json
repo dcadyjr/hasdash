@@ -28,11 +28,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "hbs": "^4.0.1",
-    "jQuery": "^1.7.4",
-    "jquery": "^3.2.1",
-    "jsdom": "^11.0.0",
     "mongoose": "^4.11.0",
-    "node-jsdom": "^3.1.5",
     "request": "^2.81.0",
     "tweet-to-html": "^1.0.2",
     "twitter-node-client": "0.0.6"
