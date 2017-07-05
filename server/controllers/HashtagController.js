@@ -23,24 +23,21 @@ router.get("/search", function(req, res){
 			var userScreenName = tweets.statuses[i].user.screen_name;//variable to hold the UserScreenName
 			var tweetId = tweets.statuses[i].id_str;//variable to hold the tweet Id
 		
-			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%' + tweetId;
-			console.log(url);
+			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%2F' + tweetId;
+
 
  			request(url, function(err, resp, body){//request embed tweet info from twitter
  				if(err){
  					console.log(err);
  				}else {
- 					console.log("Get response: " + resp.statusCode);
+ 					// console.log("Get response: " + resp.statusCode);
 
  					embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
- 					console.log(embedCode);
+ 					// console.log(embedCode);
  					console.log(embedCode.html);
  				}
 
  			})
-			
-			console.log(userScreenName);
-			console.log(tweetId);
 			
 		}
 			res.send(data);
