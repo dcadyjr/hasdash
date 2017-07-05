@@ -13,6 +13,15 @@ var express = require("express"),
 router.use(bodyParser.urlencoded({extended: true}));
 
 router.post("/search", function(req, res){
+	
+//saves the hashtag to the db with the userId
+	var tag = new Hashtag({ 
+		name: req.body.tag,
+		user: req.body.userId 
+	})
+
+	tag.save();
+
 	var embedHTML = [];
 
 	twitter.getSearch({'q': "#" + req.body.tag,'count': 5}, function(){} , function(data){//this is the search to get tweet data.
@@ -41,9 +50,7 @@ router.post("/search", function(req, res){
  					var html = {tweets: embedHTML};
 					res.render("dashboard", html);
 				}
-					// console.log(embedHTML);
-
- 					// console.log(embedCode.html);
+				
  				}
  			})
 		}
