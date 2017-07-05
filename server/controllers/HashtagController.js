@@ -33,13 +33,16 @@ router.post("/search", function(req, res){
  					// console.log(err);
  				}else {
 
- 				var embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
+ 				var embedCode = JSON.parse(body);//this allows us to dig into the tweet embed data
  					
  					embedHTML.push(embedCode.html);
 
  					if (embedHTML.length === 5){
- 					var html = {tweets: embedHTML};
-					res.render("dashboard", html);
+ 					var html = {
+ 						tweets: embedHTML,
+ 						session: req.session
+ 					};
+					res.json(html);
 				}
 					// console.log(embedHTML);
 

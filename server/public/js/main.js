@@ -16,6 +16,26 @@ $("#signup-toggle").click(function(){
 
 
 
+// get tweets via ajax so the user doesn't go to a new address every time
+$("#get-tweets-button").click(function() {
+	var tag = $("#hashtag-name").val();
+	var data = {tag: tag};
+	$.ajax({
+		method: "POST",
+		url: "http://localhost:3000/hashtags/search",
+		data: data,
+		success: function(response) {
+			console.log(response);
+			for (var i = 0; i < response.tweets.length; i++) {
+				$('.masonry-grid').append(response.tweets[i]);
+			};
+			$('.masonry-grid blockquote').masonry();
+		}
+	});
+});
+
+
+
 // post to /users to make a new user
 $("#sign-up").click(function() {
 	if ($("#signup-email-field").val() && $("#signup-name-field").val() && $("#signup-password-field").val()) {

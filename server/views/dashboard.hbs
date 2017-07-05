@@ -1,25 +1,11 @@
+<p class="intro">Welcome back, {{user.name}}!</p>
 
-{{!-- <p>Welcome back, {{user._id}}</p> --}}
-
-{{!-- <p>Welcome back, {{user.name}}!</p>
-
-<p>User dashboard showing tweets and instagrams</p>
-<p>This user's hashtags:</p> --}}
-{{!-- <ul>
-	{{#each user.hashtags}}
-	<li>{{this.name}}</li>
-	{{/each}}
-</ul> --}}
-
-<form action="http://localhost:3000/hashtags/search" method="POST">
-	<input name="tag" placeholder="#hashtag"/>
-	<button>submit</button>
+<form>
+	<input id="hashtag-name" name="tag" placeholder="#hashtag"/>
+	<button type="button" id="get-tweets-button">Submit</button>
 </form>
 
- 	<ul>
- 		{{#each tweets}}
- 		<li>{{{this}}}</li>
- 		{{/each}}
- 	</ul>
+<div class="masonry-grid"></div>
+
 
  	
