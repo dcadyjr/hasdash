@@ -34,7 +34,7 @@ router.post("/login", function(req, res) {
 				if (match === true) {
 					req.session.loggedIn = true;
 					req.session.myId = user._id;
-					res.redirect("/users/" + user._id);
+					res.json(user._id);
 				} else {
 					res.send("password incorrect"); // password was wrong
 				}
