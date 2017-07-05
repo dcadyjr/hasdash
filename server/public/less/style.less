@@ -9,10 +9,29 @@ body {
 
 .intro {
 	font-size: 1.5rem;
+	text-align: center;
+	line-height: 1.5;
+}
+
+label {
+	display: block;
+	margin-bottom: .5rem;
+}
+
+input, button {
+	border-radius: 3px;
+	border: none;
 }
 
 input {
 	display: block;
+	margin-bottom: 1rem;
+	padding: .5rem;
+	border: 1px solid #e1e8ed;
+}
+
+button {
+	padding: .5rem 1rem;
 }
 
 .toggle-wrapper {
@@ -24,8 +43,9 @@ input {
 		span {
 			flex-grow: 1;
 			text-align: center;
-			&.selected {
-				background-color: red;
+			cursor: pointer;
+			&:not(.selected) {
+				opacity: .5;
 			}
 		}
 	}
@@ -36,7 +56,7 @@ input {
 
 nav, .wrapper {
 	width:100%;
-	margin: 0 auto;
+	margin: 1rem auto;
 	padding: .5rem;
 	max-width: 60rem;
 }
@@ -52,6 +72,7 @@ nav {
 		float: right;
 		a {
 			display: inline-block;
+			margin-left: 2rem;
 		}
 	}
 }

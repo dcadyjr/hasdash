@@ -30,13 +30,13 @@ router.post("/login", function(req, res) {
 				if (match === true) {
 					req.session.loggedIn = true;
 					req.session.myId = user._id;
-					res.json(user._id);
+					res.json({id: user._id});
 				} else {
-					res.send("password incorrect"); // password was wrong
+					res.json({error: "Password was incorrect"}); // password was wrong
 				}
 			});
 		} else {
-			res.send("couldn't find that email address") // email not found
+			res.json({error: "Couldn't find that email!"}) // email not found
 		};
 	});
 });
@@ -121,7 +121,7 @@ router.post("/", function(req, res) {
 		req.session.loggedIn = true;
 		req.session.myId = user._id;
 		// couldn't get this to redirect correctly so it's handled in main.js
-		res.json(user._id);
+		res.json({id: user._id});
 	});
 });
 

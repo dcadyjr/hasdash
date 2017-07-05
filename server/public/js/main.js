@@ -18,22 +18,30 @@ $("#signup-toggle").click(function(){
 
 // post to /users to make a new user
 $("#sign-up").click(function() {
-	var email = $("#signup-email-field").val();
-	var name = $("#signup-name-field").val();
-	var password = $("#signup-password-field").val();
-	var newUser = {
-		email: email,
-		name: name,
-		password: password
+	if ($("#signup-email-field").val() && $("#signup-name-field").val() && $("#signup-password-field").val()) {
+		var email = $("#signup-email-field").val();
+		var name = $("#signup-name-field").val();
+		var password = $("#signup-password-field").val();
+		var newUser = {
+			email: email,
+			name: name,
+			password: password
+		};
+		$.ajax({
+			method: "POST",
+			url: "http://localhost:3000/users",
+			data: newUser,
+			success: function(response) {
+				if (response.id) {
+					window.location.href = "/users/" + response.id;
+				} else {
+					alert(response.error);
+				};
+			}
+		});
+	} else {
+		alert("Please fill out all the fields :)")
 	};
-	$.ajax({
-		method: "POST",
-		url: "http://localhost:3000/users",
-		data: newUser,
-		success: function(response) {
-			window.location.href = "/users/" + response;
-		}
-	});
 });
 
 // post to /users/login to login
@@ -49,7 +57,11 @@ $("#login-button").click(function() {
 		url: "http://localhost:3000/users/login",
 		data: user,
 		success: function(response) {
-			window.location.href = "/users/" + response;
+			if (response.id) {
+				window.location.href = "/users/" + response.id;
+			} else {
+				alert(response.error);
+			};
 		}
 	});
 });
