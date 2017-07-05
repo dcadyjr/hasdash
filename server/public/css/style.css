@@ -1,3 +1,24 @@
 body {
-  background-color: beige;
+  background-color: rgba(115, 201, 255, 0.15);
+  font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 1rem;
+}
+nav,
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: .5rem;
+  max-width: 60rem;
+}
+nav h1 {
+  font-size: 1rem;
+  font-weight: normal;
+  display: inline-block;
+  margin: 0;
+}
+nav .nav-right {
+  float: right;
+}
+nav .nav-right a {
+  display: inline-block;
 }

@@ -23,8 +23,14 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 app.get("/", function(req, res) {
-	var renderObject = {};
-	res.render("homepage", renderObject);
+	var renderObject = {
+		session: req.session
+	};
+	if (req.session.loggedIn === true) {
+		res.redirect("/users/" + req.session.myId);
+	} else {
+		res.render("homepage", renderObject);
+	}
 });
 
 server.listen(3000, function(){

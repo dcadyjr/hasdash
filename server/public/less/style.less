@@ -1,3 +1,30 @@
+@bg-color: rgba(115,201,255,0.15);
+@font-stack: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+
 body {
-	background-color: beige;
+	background-color: @bg-color;
+	font-family: @font-stack;
+	font-size: 1rem;
+}
+
+nav, .wrapper {
+	width:100%;
+	margin: 0 auto;
+	padding: .5rem;
+	max-width: 60rem;
+}
+
+nav {
+	h1 {
+		font-size: 1rem;
+		font-weight: normal;
+		display: inline-block;
+		margin: 0;
+	}
+	.nav-right {
+		float: right;
+		a {
+			display: inline-block;
+		}
+	}
 }
