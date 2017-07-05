@@ -4,19 +4,6 @@ var express = require("express"),
 	User = require("../models/User"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt");
-	
-
-router.use(bodyParser.urlencoded({extended: true}));
-
-
-router.get("/", function(req, res) {
-
-	User.find(function(err, users) {
-		var renderObject = {users: users};
-
-		res.render("userlist", renderObject);
-	})
-
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -34,7 +21,6 @@ router.get("/logout", function(req, res) {
 router.get("/register", function(req, res) {
 	res.render("register");
 });
-
 
 // login with information
 router.post("/login", function(req, res) {
