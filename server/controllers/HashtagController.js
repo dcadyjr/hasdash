@@ -14,7 +14,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post("/search", function(req, res){
 	
-//saves the hashtag to the db with the userId
+// saves the hashtag to the db with the userId
 	var tag = new Hashtag({ 
 		name: req.body.tag,
 		user: req.body.userId 
@@ -22,6 +22,16 @@ router.post("/search", function(req, res){
 
 	tag.save();
 
+
+	User.findById(req.body.userId, function(error, user){
+
+		var tagId = tag.id;
+
+		user.hashtags.push(tagId);
+
+		user.save();
+	})
+	
 	var embedHTML = [];
 
 	twitter.getSearch({'q': "#" + req.body.tag,'count': 5}, function(){} , function(data){//this is the search to get tweet data.
