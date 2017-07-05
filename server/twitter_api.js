@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 var Twitter = require('twitter-node-client').Twitter;
 
 var error = function (err, response, body) {
@@ -18,11 +19,5 @@ var config = {
 
 var twitter = new Twitter(config);
 
-//
-	// Get 10 tweets containing the hashtag haiku
-	//
-
-	// twitter.getSearch({'q':'#haiku','count': 10}, error, success);
-	// console.log(success);
 
 module.exports = twitter;

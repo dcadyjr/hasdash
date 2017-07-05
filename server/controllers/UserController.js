@@ -3,10 +3,19 @@ var express = require("express"),
 	bodyParser = require("body-parser"),
 	User = require("../models/User"),
 	session = require("express-session"),
-	bcrypt = require("bcrypt"),
-	twitter = require("../twitter_api.js"),
-	tweetToHTML = require('tweet-to-html');
+	bcrypt = require("bcrypt");
+	
 
+router.use(bodyParser.urlencoded({extended: true}));
+
+
+router.get("/", function(req, res) {
+
+	User.find(function(err, users) {
+		var renderObject = {users: users};
+
+		res.render("userlist", renderObject);
+	})
 
 
 router.use(bodyParser.urlencoded({extended: true}));
@@ -25,6 +34,7 @@ router.get("/logout", function(req, res) {
 router.get("/register", function(req, res) {
 	res.render("register");
 });
+
 
 // login with information
 router.post("/login", function(req, res) {
@@ -60,7 +70,12 @@ router.get("/account", function(req, res) {
 	};
 });
 
-
+router.get("/dashboard", function(req, res) {
+	User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
+		var renderObject = {user: user};
+		res.render("dashboard", renderObject)
+	});
+});
 
 router.get("/", function(req, res) {
 	if (req.session.loggedIn === true) {
@@ -91,6 +106,7 @@ router.get("/listofusers", function(req, res) {
 			users: users
 		};
 		res.json(renderObject);
+
 	});
 });
 
@@ -148,9 +164,6 @@ router.delete("/:id", function(req, res) {
 	});
 });
 
-// router.patch("/twitter", function(req, res){
-// 	twitter.getSearch({'q':'#haiku','count': 10}, error, success);
-// 		console.log(success);
-// });
+
 
 module.exports = router;
