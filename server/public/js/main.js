@@ -20,7 +20,7 @@ $("#sign-up").click(function() {
 	});
 });
 
-// post to /login to login
+// post to /users/login to login
 $("#login-button").click(function() {
 	var email = $("#login-email-field").val();
 	var password = $("#login-password-field").val();
@@ -36,4 +36,29 @@ $("#login-button").click(function() {
 			window.location.href = "/users/" + response;
 		}
 	});
+});
+
+// patch to /users/:id to edit account info
+$("#account-submit-button").click(function() {
+	if ($("#account-password-field").val() !== "") {
+		var myId = $("body").attr("id");
+		var email = $("#account-email-field").val();
+		var name = $("#account-name-field").val();
+		var password = $("#account-password-field").val();
+		var editedUser = {
+			email: email,
+			name: name,
+			password: password
+		};
+		$.ajax({
+			method: "PATCH",
+			url: "http://localhost:3000/users/" + myId,
+			data: editedUser,
+			success: function(response) {
+				window.location.href = "/users/account";
+			}
+		});
+	} else {
+		alert("password is required to change account info");
+	};
 });

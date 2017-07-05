@@ -45,6 +45,23 @@ router.post("/login", function(req, res) {
 	});
 });
 
+// get account screen
+router.get("/account", function(req, res) {
+	if (req.session.loggedIn === true) {
+		User.findById(req.session.myId, function(err, user) {
+			var renderObject = {
+				user: user,
+				session: req.session
+			};
+			res.render("account", renderObject)
+		});
+	} else {
+		res.redirect("/");
+	};
+});
+
+
+
 router.get("/", function(req, res) {
 	if (req.session.loggedIn === true) {
 		User.find(function(err, users) {
