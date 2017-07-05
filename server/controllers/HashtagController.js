@@ -12,9 +12,9 @@ var express = require("express"),
 
 router.use(bodyParser.urlencoded({extended: true}));
 
-router.get("/search", function(req, res){
-
-	twitter.getSearch({'q': "#cubs",'count': 10}, function(){} , function(data){//this is the search to get tweet data.
+router.post("/search", function(req, res){
+	
+	twitter.getSearch({'q': "#" + req.body.tag,'count': 10}, function(){} , function(data){//this is the search to get tweet data.
 			
 		tweets = JSON.parse(data);//this allows us to dig into the tweet data
 
@@ -23,6 +23,7 @@ router.get("/search", function(req, res){
 			var userScreenName = tweets.statuses[i].user.screen_name;//variable to hold the UserScreenName
 			var tweetId = tweets.statuses[i].id_str;//variable to hold the tweet Id
 		
+			//this url sends us code to embed the tweet on our page
 			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%2F' + tweetId;
 
 
@@ -30,15 +31,13 @@ router.get("/search", function(req, res){
  				if(err){
  					console.log(err);
  				}else {
- 					// console.log("Get response: " + resp.statusCode);
 
  					embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
- 					// console.log(embedCode);
+ 					
+ 					var embedHTML = embedCode.html;
  					console.log(embedCode.html);
  				}
-
  			})
-			
 		}
 			res.send(data);
 	})
