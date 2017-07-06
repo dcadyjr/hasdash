@@ -17,7 +17,7 @@ router.post("/search", function(req, res){
 // saves the hashtag to the db with the userId
 	var tag = new Hashtag({ 
 		name: req.body.tag,
-		user: req.body.userId 
+		user: req.body.userId
 	})
 
 	tag.save();

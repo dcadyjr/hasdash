@@ -27,7 +27,11 @@ var $grid = $('.masonry-grid').masonry({
 // get tweets via ajax so the user doesn't go to a new address every time
 $("#get-tweets-button").click(function() {
 	var tag = $("#hashtag-name").val();
-	var data = {tag: tag};
+	var userId = $("body").attr("id");
+	var data = {
+		tag: tag,
+		userId: userId
+	};
 	$.ajax({
 		method: "POST",
 		url: "http://localhost:3000/hashtags/search",
