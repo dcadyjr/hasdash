@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: rgba(115, 201, 255, 0.15);
   font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
@@ -98,4 +101,17 @@ nav .nav-right {
 nav .nav-right a {
   display: inline-block;
   margin-left: 2rem;
+}
+.masonry-grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid-sizer,
+.grid-item {
+  width: 50%;
+}
+.grid-item {
+  float: left;
+  background: red;
 }

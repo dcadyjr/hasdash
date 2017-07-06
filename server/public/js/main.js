@@ -16,6 +16,14 @@ $("#signup-toggle").click(function(){
 
 
 
+// initialize masonry
+
+var $grid = $('.masonry-grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
+
 // get tweets via ajax so the user doesn't go to a new address every time
 $("#get-tweets-button").click(function() {
 	var tag = $("#hashtag-name").val();
@@ -27,9 +35,15 @@ $("#get-tweets-button").click(function() {
 		success: function(response) {
 			console.log(response);
 			for (var i = 0; i < response.tweets.length; i++) {
-				$('.masonry-grid').append(response.tweets[i]);
+				// append each new tweet in a masonry grid item div
+				$('.masonry-grid').append("<div class='grid-item'>" + response.tweets[i] + "</div>");
 			};
-			$('.masonry-grid blockquote').masonry();
+			// after widgets load, refresh masonry to reposition items
+			twttr.ready(function(twttr) {
+				twttr.events.bind('loaded', function (event) {
+					$('.masonry-grid').masonry("destroy").masonry();
+				});
+			});
 		}
 	});
 });

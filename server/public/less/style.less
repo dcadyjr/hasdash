@@ -3,6 +3,10 @@
 @font-color: #14171a;
 @disabled-color: #657786;
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	background-color: @bg-color;
 	font-family: @font-stack;
@@ -107,4 +111,25 @@ nav {
 			margin-left: 2rem;
 		}
 	}
+}
+
+
+
+// masonry styles
+
+.masonry-grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-sizer,
+.grid-item {
+  width: 50%;
+  // min-height: 30px;
+}
+
+.grid-item {
+  float: left;
+  background: red;
 }
