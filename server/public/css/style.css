@@ -124,4 +124,5 @@ nav .nav-right a {
 }
 .grid-item {
   float: left;
+  padding: 0 .5rem;
 }
