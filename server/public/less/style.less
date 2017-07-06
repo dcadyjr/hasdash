@@ -109,6 +109,14 @@ nav {
 		a {
 			display: inline-block;
 			margin-left: 2rem;
+			text-decoration: none !important;
+			background: none;
+			&:hover {
+				background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @font-color 50%);
+		    	background-repeat: repeat-x;
+		    	background-size: 2px 2px;
+		    	background-position: 0px 15px;
+			}
 		}
 	}
 }
