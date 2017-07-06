@@ -17,7 +17,7 @@ router.post("/search", function(req, res){
 // saves the hashtag to the db with the userId
 	var tag = new Hashtag({ 
 		name: req.body.tag,
-		user: req.body.userId 
+		user: req.body.userId
 	})
 
 	tag.save();
@@ -51,13 +51,16 @@ router.post("/search", function(req, res){
  					// console.log(err);
  				}else {
 
- 				var embedCode = JSON.parse(body);//this allows us to dig into the tweet imbed data
+ 				var embedCode = JSON.parse(body);//this allows us to dig into the tweet embed data
  					
  					embedHTML.push(embedCode.html);
 
  					if (embedHTML.length === 5){
- 					var html = {tweets: embedHTML};
-					res.render("dashboard", html);
+ 					var html = {
+ 						tweets: embedHTML,
+ 						session: req.session
+ 					};
+					res.json(html);
 				}
 				
  				}

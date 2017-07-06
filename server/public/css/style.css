@@ -1,12 +1,23 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: rgba(115, 201, 255, 0.15);
   font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
   font-size: 1rem;
+  color: #14171a;
 }
-.intro {
+p {
+  margin: 0 0 1rem 0;
+}
+p.intro {
   font-size: 1.5rem;
   text-align: center;
   line-height: 1.5;
+  margin-bottom: 2rem;
+}
+a {
+  color: #14171a;
 }
 label {
   display: block;
@@ -16,6 +27,7 @@ input,
 button {
   border-radius: 3px;
   border: none;
+  color: #14171a;
 }
 input {
   display: block;
@@ -23,26 +35,51 @@ input {
   padding: .5rem;
   border: 1px solid #e1e8ed;
 }
+input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #657786;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #657786;
+  opacity: 1;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #657786;
+  opacity: 1;
+}
+input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #657786;
+}
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #657786;
+}
 button {
   padding: .5rem 1rem;
 }
-.toggle-wrapper {
+.lil-wrapper {
   max-width: 30rem;
   margin: 0 auto;
 }
-.toggle-wrapper .toggle-options {
+.lil-wrapper input {
+  width: 100%;
+}
+.lil-wrapper .toggle-options {
   display: flex;
   width: 100%;
 }
-.toggle-wrapper .toggle-options span {
+.lil-wrapper .toggle-options span {
   flex-grow: 1;
   text-align: center;
   cursor: pointer;
 }
-.toggle-wrapper .toggle-options span:not(.selected) {
-  opacity: .5;
+.lil-wrapper .toggle-options span:not(.selected) {
+  color: #657786;
 }
-.toggle-wrapper #login-form {
+.lil-wrapper #login-form {
   display: none;
 }
 nav,
@@ -64,4 +101,16 @@ nav .nav-right {
 nav .nav-right a {
   display: inline-block;
   margin-left: 2rem;
+}
+.masonry-grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid-sizer,
+.grid-item {
+  width: 50%;
+}
+.grid-item {
+  float: left;
 }

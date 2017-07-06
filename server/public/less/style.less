@@ -1,16 +1,31 @@
 @bg-color: rgba(115,201,255,0.15);
 @font-stack: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+@font-color: #14171a;
+@disabled-color: #657786;
+
+* {
+	box-sizing: border-box;
+}
 
 body {
 	background-color: @bg-color;
 	font-family: @font-stack;
 	font-size: 1rem;
+	color: @font-color;
 }
 
-.intro {
-	font-size: 1.5rem;
-	text-align: center;
-	line-height: 1.5;
+p {
+	margin: 0 0 1rem 0;
+	&.intro {
+		font-size: 1.5rem;
+		text-align: center;
+		line-height: 1.5;
+		margin-bottom: 2rem;
+	}
+}
+
+a {
+	color: @font-color;
 }
 
 label {
@@ -21,6 +36,7 @@ label {
 input, button {
 	border-radius: 3px;
 	border: none;
+	color: @font-color;
 }
 
 input {
@@ -28,15 +44,35 @@ input {
 	margin-bottom: 1rem;
 	padding: .5rem;
 	border: 1px solid #e1e8ed;
+	&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+   		color: @disabled-color;
+	}
+	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: @disabled-color;
+		opacity: 1;
+	}
+	&::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: @disabled-color;
+		opacity: 1;
+	}
+	&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: @disabled-color;
+	}
+	&::-ms-input-placeholder { /* Microsoft Edge */
+		color: @disabled-color;
+	}
 }
 
 button {
 	padding: .5rem 1rem;
 }
 
-.toggle-wrapper {
+.lil-wrapper {
 	max-width: 30rem;
     margin: 0 auto;
+    input {
+    	width: 100%;
+    }
     .toggle-options {
 	display: flex;
 	width: 100%;
@@ -45,7 +81,7 @@ button {
 			text-align: center;
 			cursor: pointer;
 			&:not(.selected) {
-				opacity: .5;
+				color: @disabled-color;
 			}
 		}
 	}
@@ -75,4 +111,24 @@ nav {
 			margin-left: 2rem;
 		}
 	}
+}
+
+
+
+// masonry styles
+
+.masonry-grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-sizer,
+.grid-item {
+  width: 50%;
+  // min-height: 30px;
+}
+
+.grid-item {
+  float: left;
 }

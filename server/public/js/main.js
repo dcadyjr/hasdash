@@ -16,6 +16,62 @@ $("#signup-toggle").click(function(){
 
 
 
+// initialize masonry
+
+var $grid = $('.masonry-grid').masonry({
+	itemSelector: '.grid-item',
+	columnWidth: '.grid-sizer',
+	percentPosition: true
+});
+
+// get tweets via ajax so the user doesn't go to a new address every time
+
+var requestHashtag = function() {
+	var tag = $("#hashtag-name").val();
+	var userId = $("body").attr("id");
+	var data = {
+		tag: tag,
+		userId: userId
+	};
+	$.ajax({
+		method: "POST",
+		url: "http://localhost:3000/hashtags/search",
+		data: data,
+		success: function(response) {
+			console.log(response);
+			for (var i = 0; i < response.tweets.length; i++) {
+				// append each new tweet in a masonry grid item div
+				$('.masonry-grid').append("<div class='grid-item'>" + response.tweets[i] + "</div>");
+			};
+			// after widgets load, refresh masonry to reposition items
+			twttr.ready(function(twttr) {
+				twttr.events.bind('loaded', function (event) {
+					$('.masonry-grid').masonry("destroy").masonry({
+						itemSelector: '.grid-item',
+						columnWidth: '.grid-sizer',
+						percentPosition: true
+					});
+				});
+			});
+		}
+	});
+};
+
+$('#hashtag-name').keypress(function (e) {
+	console.log("1");
+	if (e.which == 13) {
+		requestHashtag();
+		return false;
+	}
+});
+
+$("#get-tweets-button").click(function(){
+	requestHashtag();
+	console.log("2")
+});
+
+
+
 // post to /users to make a new user
 $("#sign-up").click(function() {
 	if ($("#signup-email-field").val() && $("#signup-name-field").val() && $("#signup-password-field").val()) {
@@ -93,7 +149,7 @@ $("#account-submit-button").click(function() {
 
 //click function to initiate search from history
 $(".taglist").click(function(){
-		
+		var 
 	
 	var embedHTML = [];
 
