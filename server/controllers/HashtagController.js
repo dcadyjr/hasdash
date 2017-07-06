@@ -14,23 +14,31 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post("/search", function(req, res){
 	
-// saves the hashtag to the db with the userId
-	var tag = new Hashtag({ 
+Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashtags){
+
+	if(hashtags.length === 0){
+
+		var tag = new Hashtag({ 
 		name: req.body.tag,
 		user: req.body.userId
-	})
+		})
 
-	tag.save();
+		tag.save();
 
-	//saves hashtag to the user in d
-	User.findById(req.body.userId, function(error, user){
+		//saves hashtag to the user in d
+		User.findById(req.body.userId, function(error, user){
 
-		var tagId = tag.id;
+			var tagId = tag.id;
 
-		user.hashtags.push(tagId);
+			user.hashtags.push(tagId);
 
-		user.save();
-	})
+			user.save();
+		})
+	}
+} )
+	
+// saves the hashtag to the db with the userId
+	
 	
 	var embedHTML = [];
 

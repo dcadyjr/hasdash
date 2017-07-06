@@ -157,7 +157,7 @@ $("#account-submit-button").click(function() {
 
 //click function to initiate search from history
 $(".taglist").click(function(){
-		var 
+ 
 	
 	var embedHTML = [];
 
