@@ -95,20 +95,23 @@ nav h1 {
   display: inline-block;
   margin: 0;
 }
+nav a {
+  text-decoration: none !important;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #14171a 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0px 15px;
+}
+nav a:hover {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #657786 50%);
+  color: #657786;
+}
 nav .nav-right {
   float: right;
 }
 nav .nav-right a {
   display: inline-block;
   margin-left: 2rem;
-  text-decoration: none !important;
-  background: none;
-}
-nav .nav-right a:hover {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #14171a 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0px 15px;
 }
 .masonry-grid:after {
   content: '';
@@ -121,4 +124,5 @@ nav .nav-right a:hover {
 }
 .grid-item {
   float: left;
+  padding: 0 .5rem;
 }

@@ -104,19 +104,22 @@ nav {
 		display: inline-block;
 		margin: 0;
 	}
+	a {
+		text-decoration: none !important;
+		background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @font-color 50%);
+	  	background-repeat: repeat-x;
+	   	background-size: 2px 2px;
+	   	background-position: 0px 15px;
+		&:hover {
+			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @disabled-color 50%);
+			color: @disabled-color;
+	    }
+	}
 	.nav-right {
 		float: right;
 		a {
 			display: inline-block;
 			margin-left: 2rem;
-			text-decoration: none !important;
-			background: none;
-			&:hover {
-				background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @font-color 50%);
-		    	background-repeat: repeat-x;
-		    	background-size: 2px 2px;
-		    	background-position: 0px 15px;
-			}
 		}
 	}
 }
@@ -139,4 +142,14 @@ nav {
 
 .grid-item {
   float: left;
+  padding: 0 .5rem;
+}
+
+// not working yet
+@media only screen and (max-width: 48rem) {
+
+.grid-sizer,
+.grid-item {
+  width: 100%;
+
 }
