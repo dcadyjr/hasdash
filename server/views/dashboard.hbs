@@ -1,41 +1,20 @@
 <p class="intro">Welcome back, {{user.name}}!</p>
 
+<div class="hashes-wrapper">
+	<div id="hashtory">
+		<form>
+			<input id="hashtag-name" name="tag" placeholder="#hashtag"/>
+			<button type="button" id="get-tweets-button">Submit</button>
+		</form>
+		<h3>Hashtory</h3>
+		<ul class="sortable">
+			{{#each user.hashtags}}
+				<li class="taglist"><a href="#">{{this.name}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
 
-<div>
-	<h2>Hashtory</h2>
-	<ul>
-		{{#each user.hashtags}}
-		<li class="taglist"><a href="#">{{this.name}}</a></li>
-		{{/each}}
-	</ul>
+	<div class="masonry-grid">
+	  <div class="grid-sizer"></div>
+	</div>
 </div>
-
-
-
-
-
-{{!-- <p>Welcome back, {{user._id}}</p> --}}
-
-{{!-- <p>Welcome back, {{user.name}}!</p>
-
-<p>User dashboard showing tweets and instagrams</p>
-<p>This user's hashtags:</p> --}}
-
-
-<form>
-	<input id="hashtag-name" name="tag" placeholder="#hashtag"/>
-	<button type="button" id="get-tweets-button">Submit</button>
-</form>
-
-
-
-{{!-- 
-<form action="http://localhost:3000/hashtags/search" method="POST">
-	<input name="tag" placeholder="#hashtag"/>
-	<input name="userId" value="{{user.id}}"/>
-	<button>submit</button>
-</form> --}}
-
-<div class="masonry-grid">
-  <div class="grid-sizer"></div>
-</div> 	
