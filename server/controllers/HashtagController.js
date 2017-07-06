@@ -22,7 +22,7 @@ router.post("/search", function(req, res){
 
 	tag.save();
 
-
+	//saves hashtag to the user in d
 	User.findById(req.body.userId, function(error, user){
 
 		var tagId = tag.id;
@@ -45,7 +45,6 @@ router.post("/search", function(req, res){
 		
 			//this url sends us code to embed the tweet on our page
 			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%2F' + tweetId;
-
 
  			request(url, function(err, resp, body){//request embed tweet info from twitter
  				if(err){
