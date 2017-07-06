@@ -19,13 +19,14 @@ $("#signup-toggle").click(function(){
 // initialize masonry
 
 var $grid = $('.masonry-grid').masonry({
-  itemSelector: '.grid-item',
-  columnWidth: '.grid-sizer',
-  percentPosition: true
+	itemSelector: '.grid-item',
+	columnWidth: '.grid-sizer',
+	percentPosition: true
 });
 
 // get tweets via ajax so the user doesn't go to a new address every time
-$("#get-tweets-button").click(function() {
+
+var requestHashtag = function() {
 	var tag = $("#hashtag-name").val();
 	var userId = $("body").attr("id");
 	var data = {
@@ -45,11 +46,28 @@ $("#get-tweets-button").click(function() {
 			// after widgets load, refresh masonry to reposition items
 			twttr.ready(function(twttr) {
 				twttr.events.bind('loaded', function (event) {
-					$('.masonry-grid').masonry("destroy").masonry();
+					$('.masonry-grid').masonry("destroy").masonry({
+						itemSelector: '.grid-item',
+						columnWidth: '.grid-sizer',
+						percentPosition: true
+					});
 				});
 			});
 		}
 	});
+};
+
+$('#hashtag-name').keypress(function (e) {
+	console.log("1");
+	if (e.which == 13) {
+		requestHashtag();
+		return false;
+	}
+});
+
+$("#get-tweets-button").click(function(){
+	requestHashtag();
+	console.log("2")
 });
 
 
