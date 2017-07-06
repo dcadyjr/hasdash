@@ -27,6 +27,7 @@ var $grid = $('.masonry-grid').masonry({
 // get tweets via ajax so the user doesn't go to a new address every time
 
 var requestHashtag = function(hashtag) {
+	$(".grid-item").remove();
 	var tag = hashtag
 	var userId = $("body").attr("id");
 	var data = {
@@ -72,7 +73,8 @@ $("#get-tweets-button").click(function(){
 
 
 // get tweets when you click on a hashtag in the sidebar
-$(".taglist").click(function() {
+$(".taglist").click(function(e) {
+	e.preventDefault();
 	var hashtag = $(this).text();
 	requestHashtag(hashtag);
 	console.log(hashtag)
@@ -155,6 +157,7 @@ $("#account-submit-button").click(function() {
 	};
 });
 
+<<<<<<< HEAD
 //function to make history list drag sortable
 $(function() {
     $("#sortable").sortable({
@@ -176,3 +179,5 @@ $(function() {
 
 
 
+=======
+>>>>>>> 0518a389d1142d3ea3179ee42a97f9cfcd654957
