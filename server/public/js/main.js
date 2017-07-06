@@ -26,8 +26,8 @@ var $grid = $('.masonry-grid').masonry({
 
 // get tweets via ajax so the user doesn't go to a new address every time
 
-var requestHashtag = function() {
-	var tag = $("#hashtag-name").val();
+var requestHashtag = function(hashtag) {
+	var tag = hashtag
 	var userId = $("body").attr("id");
 	var data = {
 		tag: tag,
@@ -58,17 +58,25 @@ var requestHashtag = function() {
 };
 
 $('#hashtag-name').keypress(function (e) {
-	console.log("1");
 	if (e.which == 13) {
-		requestHashtag();
+		var hashtag = $("#hashtag-name").val();
+		requestHashtag(hashtag);
 		return false;
 	}
 });
 
 $("#get-tweets-button").click(function(){
-	requestHashtag();
-	console.log("2")
+	var hashtag = $("#hashtag-name").val();
+	requestHashtag(hashtag);
 });
+
+
+// get tweets when you click on a hashtag in the sidebar
+$(".taglist").click(function() {
+	var hashtag = $(this).text();
+	requestHashtag(hashtag);
+	console.log(hashtag)
+})
 
 
 
