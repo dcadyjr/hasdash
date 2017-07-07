@@ -157,7 +157,7 @@ $("#account-submit-button").click(function() {
 	};
 });
 
-<<<<<<< HEAD
+
 //function to make history list drag sortable
 $(function() {
     $("#sortable").sortable({
@@ -169,15 +169,3 @@ $(function() {
   } );
 
 
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 0518a389d1142d3ea3179ee42a97f9cfcd654957
