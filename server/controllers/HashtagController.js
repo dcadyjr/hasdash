@@ -19,28 +19,17 @@ router.post("/search", function(req, res){
 
 			var tag = new Hashtag({ //creates a new hashtag in the db.
 				name: req.body.tag,
-				user: req.body.userId
+				user: req.body.userId,
+				timestamp: req.body.timestamp
 			})
 
 			tag.save();//saves the hashtag to the db.
-
-		var tag = new Hashtag({ 
-		name: req.body.tag,
-		user: req.body.userId,
-		timestamp: req.body.timestamp
-		})
-
-		tag.save();
 
 		//saves hashtag to the user in d
 		User.findById(req.body.userId, function(error, user){
 
 			var tagId = tag.id;
 
-			//saves hashtag to the user in db
-			User.findById(req.body.userId, function(error, user){
-
-				var tagId = tag.id;
 				user.hashtags.push(tagId);
 				user.save();//saves the hashtag to the user in the db
 			})
