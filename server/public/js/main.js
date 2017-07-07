@@ -164,7 +164,24 @@ $("#account-submit-button").click(function() {
 $(function() {
     $("#sortable").sortable({
       revert: true,
-      helper: 'clone'
+      helper: 'clone',
+      update: function() {
+      	var hashtagsArray = [];
+      	$("#sortable .taglist").each(function(i) {
+      		var thisId = $(this).attr("id");
+      		var thisPosition = i + 1;
+      		hashtagsArray.push({id: thisId, position: thisPosition});
+      	});
+      	var data = {hashtags: hashtagsArray}
+      	$.ajax({
+			method: "PATCH",
+			url: "http://localhost:3000/hashtags/update-order",
+			data: data,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+      }
     });
  
     $("ul, li").disableSelection();

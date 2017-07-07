@@ -78,6 +78,25 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 	})
 })
 
+// write new positions for saved tags to the database
+router.patch("/update-order", function(req, res) {
+	var ticker = 0;
+	var loopArray = function() {
+	    Hashtag.findById(req.body.hashtags[ticker].id, function(err, hashtag) {
+			hashtag.savedPosition = req.body.hashtags[ticker].position;
+			hashtag.save();
+			console.log(hashtag);
+			ticker++;
+			if(ticker < req.body.hashtags.length) {
+	            loopArray();   
+	        } else {
+	        	res.json("updated");
+	        }
+		});
+    };
+    loopArray();
+});
+
 router.get("/", function(req, res) {
 	Hashtag.find(function(err, hashtags) {
 		var renderObject = {hashtags: hashtags};
@@ -129,26 +148,6 @@ router.delete("/:id", function(req, res) {
 		res.json("success");
 	});
 });
-
-// write new positions for saved tags to the database
-// router.patch("/:id", function(req, res) {
-// 	if (req.body.password) {
-// 		bcrypt.hash(req.body.password, 10, function(err, hash) {
-// 			req.body.password = hash;
-// 			Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
-// 				Hashtag.findById(req.params.id, function(err, hashtag) {
-// 					res.json(hashtag);
-// 				});
-// 			});
-// 		})
-// 	} else {
-// 		Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
-// 			Hashtag.findById(req.params.id, function(err, hashtag) {
-// 				res.json(hashtag);
-// 			});
-// 		});
-// 	};
-// });
 
 
 
