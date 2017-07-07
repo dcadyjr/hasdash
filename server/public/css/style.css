@@ -113,6 +113,15 @@ nav .nav-right a {
   display: inline-block;
   margin-left: 2rem;
 }
+.hashes-wrapper {
+  display: flex;
+}
+.hashes-wrapper #hashtory {
+  flex: 0 0 20%;
+}
+.hashes-wrapper .masonry-grid {
+  flex-grow: 1;
+}
 .masonry-grid:after {
   content: '';
   display: block;
@@ -125,4 +134,10 @@ nav .nav-right a {
 .grid-item {
   float: left;
   padding: 0 .5rem;
+}
+@media only screen and (max-width: 48rem) {
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
+  }
 }

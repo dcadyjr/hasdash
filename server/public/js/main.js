@@ -157,7 +157,10 @@ $("#account-submit-button").click(function() {
 	};
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55e5f4c6080b68df06c2d8319303d7011949bcdb
 //function to make history list drag sortable
 $(function() {
     $("#sortable").sortable({
@@ -169,3 +172,16 @@ $(function() {
   } );
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 55e5f4c6080b68df06c2d8319303d7011949bcdb
