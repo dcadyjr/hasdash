@@ -75,7 +75,7 @@ $("#get-tweets-button").click(function(){
 
 
 // get tweets when you click on a hashtag in the sidebar
-$(".taglist").click(function(e) {
+$(".taglist a").not(".taglist span a").click(function(e) {
 	e.preventDefault();
 	$(".off-canvas").removeClass("vis"); // hide sidebar on mobile
 	var hashtag = $(this).text();
@@ -161,7 +161,6 @@ $("#account-submit-button").click(function() {
 });
 
 
-//function to make history list drag sortable
 
 // function to make history list drag sortable
 
@@ -190,6 +189,24 @@ $(function() {
  
     $("ul, li").disableSelection();
   } );
+
+$(".taglist .hover-option a").on("click", function(e) {
+	e.preventDefault();
+	var thisHashId = $(this).parent().parent().attr("id");
+	if ($(this).text() === "save") {
+		var data = {saved: true}
+	} else {
+		var data = {saved: false}
+	};
+	$.ajax({
+			method: "PATCH",
+			url: "http://localhost:3000/hashtags/" + thisHashId,
+			data: data,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+})
 
 
 

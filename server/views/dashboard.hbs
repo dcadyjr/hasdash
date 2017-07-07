@@ -12,13 +12,13 @@
 			<h3>Saved</h3>
 			<ul id="sortable">
 				{{#each user.savedHashtags}}
-					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a></li>
+					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a> <span class="hover-option">(<a href="#">unsave</a>)</span></li>
 				{{/each}}
 			</ul>
 			<h3>Hashtory</h3>
 			<ul>
 				{{#each user.hashtags}}
-					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a></li>
+					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a> <span class="hover-option">(<a href="#">save</a>)</span></li>
 				{{/each}}
 			</ul>
 		</div>

@@ -173,6 +173,12 @@ ul li {
   padding: 0;
   list-style: none;
 }
+.taglist .hover-option {
+  display: none;
+}
+.taglist:hover .hover-option {
+  display: inline;
+}
 .masonry-grid:after {
   content: '';
   display: block;
