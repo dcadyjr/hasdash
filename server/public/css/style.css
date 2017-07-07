@@ -118,9 +118,13 @@ nav .nav-right a {
 }
 .hashes-wrapper #hashtory {
   flex: 0 0 20%;
+  margin: .5rem;
 }
 .hashes-wrapper .masonry-grid {
   flex-grow: 1;
+}
+.hashes-wrapper input {
+  width: 100%;
 }
 .masonry-grid:after {
   content: '';
@@ -134,6 +138,9 @@ nav .nav-right a {
 .grid-item {
   float: left;
   padding: 0 .5rem;
+}
+.grid-item twitterwidget {
+  margin: .5rem 0 !important;
 }
 @media only screen and (max-width: 48rem) {
   .grid-sizer,

@@ -129,9 +129,13 @@ nav {
 	display: flex;
 	#hashtory {
 		flex: 0 0 20%;
+		margin: .5rem;
 	}
 	.masonry-grid {
 		flex-grow: 1;
+	}
+	input {
+		width: 100%;
 	}
 }
 
@@ -140,27 +144,28 @@ nav {
 // masonry styles
 
 .masonry-grid:after {
-  content: '';
-  display: block;
-  clear: both;
+	content: '';
+	display: block;
+	clear: both;
 }
 
-.grid-sizer,
-.grid-item {
-  width: 50%;
-  // min-height: 30px;
+.grid-sizer, .grid-item {
+	width: 50%;
 }
 
 .grid-item {
-  float: left;
-  padding: 0 .5rem;
+	float: left;
+	padding: 0 .5rem;
+	twitterwidget {
+		margin: .5rem 0 !important;
+	}
 }
 
 // not working yet
 @media only screen and (max-width: 48rem) {
 
-.grid-sizer,
-.grid-item {
-  width: 100%;
-}
+	.grid-sizer, .grid-item {
+		width: 100%;
+	}
+
 }
