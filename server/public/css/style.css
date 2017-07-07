@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: rgba(115, 201, 255, 0.15);
+  background-color: #eaf6ff;
   font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
   font-size: 1rem;
   color: #14171a;
@@ -119,12 +119,50 @@ nav .nav-right a {
 .hashes-wrapper #hashtory {
   flex: 0 0 20%;
   margin: .5rem;
+  position: relative;
+}
+@media only screen and (max-width: 30rem) {
+  .hashes-wrapper #hashtory .off-canvas {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: 10;
+    background-color: #eaf6ff;
+    padding: .5rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 3px;
+    -webkit-transition-property: left;
+    -webkit-transition-duration: .3s;
+    -webkit-transition-timing-function: easeInOutQuart;
+    transition-property: left;
+    transition-duration: .3s;
+    transition-timing-function: easeInOutQuart;
+  }
+  .hashes-wrapper #hashtory .off-canvas.vis {
+    left: 0%;
+  }
 }
 .hashes-wrapper .masonry-grid {
   flex-grow: 1;
 }
 .hashes-wrapper input {
   width: 100%;
+}
+@media only screen and (max-width: 30rem) {
+  .hashes-wrapper input {
+    width: initial;
+    display: inline-block;
+  }
+}
+@media only screen and (max-width: 30rem) {
+  .hashes-wrapper #get-tweets-button {
+    display: inline-block;
+  }
+}
+@media only screen and (max-width: 30rem) {
+  .hashes-wrapper {
+    flex-direction: column;
+  }
 }
 .masonry-grid:after {
   content: '';
@@ -135,6 +173,12 @@ nav .nav-right a {
 .grid-item {
   width: 50%;
 }
+@media only screen and (max-width: 48rem) {
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
+  }
+}
 .grid-item {
   float: left;
   padding: 0 .5rem;
@@ -142,9 +186,11 @@ nav .nav-right a {
 .grid-item twitterwidget {
   margin: .5rem 0 !important;
 }
-@media only screen and (max-width: 48rem) {
-  .grid-sizer,
-  .grid-item {
-    width: 100%;
+#off-canvas-toggle {
+  display: none;
+}
+@media only screen and (max-width: 30rem) {
+  #off-canvas-toggle {
+    display: block;
   }
 }

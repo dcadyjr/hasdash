@@ -75,6 +75,7 @@ $("#get-tweets-button").click(function(){
 // get tweets when you click on a hashtag in the sidebar
 $(".taglist").click(function(e) {
 	e.preventDefault();
+	$(".off-canvas").removeClass("vis"); // hide sidebar on mobile
 	var hashtag = $(this).text();
 	requestHashtag(hashtag);
 	console.log(hashtag)
@@ -156,7 +157,8 @@ $("#account-submit-button").click(function() {
 		alert("password is required to change account info");
 	};
 });
-//function to make history list drag sortable
+
+// function to make history list drag sortable
 $(function() {
     $("#sortable").sortable({
       revert: true,
@@ -165,3 +167,23 @@ $(function() {
  
     $("ul, li").disableSelection();
   } );
+
+
+// hide/display off-canvas hashstory on mobile
+var offCanvasDiv = $(".off-canvas");
+var canvasToggle = false
+$("#off-canvas-toggle").click(function() {
+	if (canvasToggle) {
+		$(".off-canvas").removeClass("vis");
+	} else {
+		$(".off-canvas").addClass("vis");
+	}
+});
+
+// from https://stackoverflow.com/questions/1403615/use-jquery-to-hide-a-div-when-the-user-clicks-outside-of-it
+$("body").on("click", function(e) {
+	if (!$("#off-canvas-toggle").is(e.target) && !offCanvasDiv.is(e.target) && offCanvasDiv.has(e.target).length === 0) {
+		$(".off-canvas").removeClass("vis");
+	};
+});
+

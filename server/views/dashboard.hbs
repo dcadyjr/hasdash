@@ -7,12 +7,15 @@
 			<input id="hashtag-name" name="tag" placeholder="#hashtag"/>
 			<button type="button" id="get-tweets-button">Submit</button>
 		</form>
-		<h3>Hashtory</h3>
-		<ul id="sortable">
-			{{#each user.hashtags}}
-				<li class="taglist ui-state-default"><a href="#">{{this.name}}</a></li>
-			{{/each}}
-		</ul>
+		<button type="button" id="off-canvas-toggle">&lt; See Hashtory</button>
+		<div class="off-canvas">
+			<h3>Hashtory</h3>
+			<ul id="sortable">
+				{{#each user.hashtags}}
+					<li class="taglist ui-state-default"><a href="#">{{this.name}}</a></li>
+				{{/each}}
+			</ul>
+		</div>
 	</div>
 
 	<div class="masonry-grid">

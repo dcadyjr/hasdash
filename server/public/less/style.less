@@ -1,4 +1,4 @@
-@bg-color: rgba(115,201,255,0.15);
+@bg-color: rgb(234,246,255);
 @font-stack: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
 @font-color: #14171a;
 @disabled-color: #657786;
@@ -74,8 +74,8 @@ button {
     	width: 100%;
     }
     .toggle-options {
-	display: flex;
-	width: 100%;
+		display: flex;
+		width: 100%;
 		span {
 			flex-grow: 1;
 			text-align: center;
@@ -130,12 +130,47 @@ nav {
 	#hashtory {
 		flex: 0 0 20%;
 		margin: .5rem;
+		position: relative;
+		.off-canvas {
+			@media only screen and (max-width: 30rem) {
+				position: absolute;
+			    top: 0;
+			    left: -100%;
+			    &.vis {
+			    	left: 0%;
+			    }
+			    z-index: 10;
+			    background-color: @bg-color;
+			    padding: .5rem;
+			    border: 1px solid #e1e8ed;
+			    border-radius: 3px;
+
+			    -webkit-transition-property: left;
+			    -webkit-transition-duration: .3s;
+			    -webkit-transition-timing-function: easeInOutQuart;
+			    transition-property: left;
+			    transition-duration: .3s;
+			    transition-timing-function: easeInOutQuart;
+			}
+		}
 	}
 	.masonry-grid {
 		flex-grow: 1;
 	}
 	input {
 		width: 100%;
+		@media only screen and (max-width: 30rem) {
+			width: initial;
+			display: inline-block;
+		}
+	}
+	#get-tweets-button {
+		@media only screen and (max-width: 30rem) {
+			display: inline-block;
+		}
+	}
+	@media only screen and (max-width: 30rem) {
+		flex-direction: column;
 	}
 }
 
@@ -151,6 +186,9 @@ nav {
 
 .grid-sizer, .grid-item {
 	width: 50%;
+	@media only screen and (max-width: 48rem) {
+		width: 100%;
+	}
 }
 
 .grid-item {
@@ -161,11 +199,9 @@ nav {
 	}
 }
 
-// not working yet
-@media only screen and (max-width: 48rem) {
-
-	.grid-sizer, .grid-item {
-		width: 100%;
+#off-canvas-toggle {
+	display: none;
+	@media only screen and (max-width: 30rem) {
+		display: block;
 	}
-
 }
