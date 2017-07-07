@@ -102,8 +102,8 @@ router.get("/:id", function(req, res) {
 				renderObject.user.savedHashtags.sort(function (a, b) {
 					return a.savedPosition - b.savedPosition;
 				});
-				// then we'll have to sort them to display in order
 			};
+			renderObject.user.hashtags = renderObject.user.hashtags.slice(0, 10);
 			res.render("dashboard", renderObject)
 		});
 	} else {
