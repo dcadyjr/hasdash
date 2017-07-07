@@ -30,9 +30,11 @@ var requestHashtag = function(hashtag) {
 	$(".grid-item").remove();
 	var tag = hashtag
 	var userId = $("body").attr("id");
+	var timestamp = $.now();
 	var data = {
 		tag: tag,
-		userId: userId
+		userId: userId,
+		timestamp: timestamp
 	};
 	$.ajax({
 		method: "POST",

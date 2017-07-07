@@ -20,7 +20,8 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 
 		var tag = new Hashtag({ 
 		name: req.body.tag,
-		user: req.body.userId
+		user: req.body.userId,
+		timestamp: req.body.timestamp
 		})
 
 		tag.save();
@@ -94,6 +95,7 @@ router.post("/", function(req, res) {
 	var hashtag = new Hashtag({
 		name: req.body.name,
 		user: req.body.user,
+		timestamp: req.body.timestamp
 	});
 	hashtag.save();
 	User.findById(hashtag.user, function(err, user) {

@@ -89,7 +89,7 @@ router.get("/listofusers", function(req, res) {
 
 router.get("/:id", function(req, res) {
 	if (req.session.loggedIn === true) {
-		User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
+		User.findById(req.params.id).populate({path: "hashtags", options: { sort: { timestamp: -1 }}}).exec(function(err, user) {
 			var renderObject = {
 				user: user,
 				session: req.session
