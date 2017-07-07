@@ -60,6 +60,7 @@ var requestHashtag = function(hashtag) {
 	});
 };
 
+// search for hashtags if you press enter while in the input
 $('#hashtag-name').keypress(function (e) {
 	if (e.which == 13) {
 		var hashtag = $("#hashtag-name").val();
@@ -68,6 +69,7 @@ $('#hashtag-name').keypress(function (e) {
 	}
 });
 
+// search for hashtags on button click
 $("#get-tweets-button").click(function(){
 	var hashtag = $("#hashtag-name").val();
 	requestHashtag(hashtag);
@@ -166,6 +168,7 @@ $(function() {
     $("#sortable").sortable({
       revert: true,
       helper: 'clone',
+      // when it updates send a request to update the hashtag order in the database
       update: function() {
       	var hashtagsArray = [];
       	$("#sortable .taglist").each(function(i) {
@@ -188,6 +191,7 @@ $(function() {
     $("ul, li").disableSelection();
   } );
 
+// save and unsave hashtags
 $(".taglist .hover-option a").on("click", function(e) {
 	e.preventDefault();
 	var thisHashId = $(this).parent().parent().attr("id");

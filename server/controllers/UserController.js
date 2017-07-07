@@ -89,20 +89,24 @@ router.get("/listofusers", function(req, res) {
 
 router.get("/:id", function(req, res) {
 	if (req.session.loggedIn === true) {
+		// find the user, populate hashtags, and sort hashtags by date
 		User.findById(req.params.id).populate({path: "hashtags", options: { sort: { timestamp: -1 }}}).exec(function(err, user) {
 			var renderObject = {
 				user: user,
 				session: req.session
 			};
+			// push hashtags labeled "saved" into a new array
 			renderObject.user.savedHashtags = [];
 			for (var i = 0; i < renderObject.user.hashtags.length; i++) {
 				if (renderObject.user.hashtags[i].saved) {
 					renderObject.user.savedHashtags.push(renderObject.user.hashtags[i]);
 				};
+				// sort the saved hashtags so they show up in the user's order
 				renderObject.user.savedHashtags.sort(function (a, b) {
 					return a.savedPosition - b.savedPosition;
 				});
 			};
+			// only display the last ten searches
 			renderObject.user.hashtags = renderObject.user.hashtags.slice(0, 10);
 			res.render("dashboard", renderObject)
 		});
