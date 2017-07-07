@@ -11,16 +11,14 @@
 		<div class="off-canvas">
 			<h3>Saved</h3>
 			<ul id="sortable">
-				{{#each user.hashtags}}
-				{{#if this.saved}}
-					<li class="taglist ui-state-default"><a href="#">{{this.name}}</a>, {{this.timestamp}}</li>
-				{{/if}}
+				{{#each user.savedHashtags}}
+					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a></li>
 				{{/each}}
 			</ul>
 			<h3>Hashtory</h3>
 			<ul>
 				{{#each user.hashtags}}
-					<li class="taglist ui-state-default"><a href="#">{{this.name}}</a>, {{this.timestamp}}</li>
+					<li class="taglist ui-state-default" id="{{this._id}}"><a href="#">{{this.name}}</a></li>
 				{{/each}}
 			</ul>
 		</div>

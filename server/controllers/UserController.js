@@ -94,6 +94,16 @@ router.get("/:id", function(req, res) {
 				user: user,
 				session: req.session
 			};
+			renderObject.user.savedHashtags = [];
+			for (var i = 0; i < renderObject.user.hashtags.length; i++) {
+				if (renderObject.user.hashtags[i].saved) {
+					renderObject.user.savedHashtags.push(renderObject.user.hashtags[i]);
+				};
+				renderObject.user.savedHashtags.sort(function (a, b) {
+					return a.savedPosition - b.savedPosition;
+				});
+				// then we'll have to sort them to display in order
+			};
 			res.render("dashboard", renderObject)
 		});
 	} else {

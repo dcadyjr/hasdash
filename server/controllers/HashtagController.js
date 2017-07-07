@@ -130,4 +130,36 @@ router.delete("/:id", function(req, res) {
 	});
 });
 
+// write new positions for saved tags to the database
+// router.patch("/:id", function(req, res) {
+// 	if (req.body.password) {
+// 		bcrypt.hash(req.body.password, 10, function(err, hash) {
+// 			req.body.password = hash;
+// 			Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
+// 				Hashtag.findById(req.params.id, function(err, hashtag) {
+// 					res.json(hashtag);
+// 				});
+// 			});
+// 		})
+// 	} else {
+// 		Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
+// 			Hashtag.findById(req.params.id, function(err, hashtag) {
+// 				res.json(hashtag);
+// 			});
+// 		});
+// 	};
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
