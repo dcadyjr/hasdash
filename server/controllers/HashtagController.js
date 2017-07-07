@@ -6,7 +6,6 @@ var express = require("express"),
 	session = require("express-session"),
 	bcrypt = require("bcrypt"),
 	twitter = require("../twitter_api.js"),
-	// tweetToHTML = require('tweet-to-html'),//converts twitter's API tweet objects text property to HTML
 	request = require('request');//for making request to twitter for the embed html
 
 
@@ -14,32 +13,28 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post("/search", function(req, res){
 	
-Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashtags){
+	Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashtags){//looks in the db to see if a hashtag already exists for that user.
+																						// if there is it put it in an array called hashtags.
+		if(hashtags.length === 0){//if the array is empty it creates a new tag in the db
 
-	if(hashtags.length === 0){
+			var tag = new Hashtag({ //creates a new hashtag in the db.
+				name: req.body.tag,
+				user: req.body.userId
+			})
 
-		var tag = new Hashtag({ 
-		name: req.body.tag,
-		user: req.body.userId
-		})
+			tag.save();//saves the hashtag to the db.
 
-		tag.save();
+			//saves hashtag to the user in db
+			User.findById(req.body.userId, function(error, user){
 
-		//saves hashtag to the user in d
-		User.findById(req.body.userId, function(error, user){
+				var tagId = tag.id;
+				user.hashtags.push(tagId);
+				user.save();//saves the hashtag to the user in the db
+			})
+		}
+	} )
 
-			var tagId = tag.id;
-
-			user.hashtags.push(tagId);
-
-			user.save();
-		})
-	}
-} )
-	
-// saves the hashtag to the db with the userId
-
-	var embedHTML = [];
+	var embedHTML = [];//array to hold the blockguote code from twitter to display embedded tweets
 
 	twitter.getSearch({'q': "#" + req.body.tag + "&-filter:nativeretweets",'count': 10}, function(){} , function(data){//this is the search to get tweet data.
 			
@@ -50,26 +45,25 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 			var userScreenName = tweets.statuses[i].user.screen_name;//variable to hold the UserScreenName
 			var tweetId = tweets.statuses[i].id_str;//variable to hold the tweet Id
 		
-			console.log(userScreenName);
-			console.log(tweetId);
 			//this url sends us code to embed the tweet on our page
 			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%2F' + tweetId;
 
  			request(url, function(err, resp, body){//request embed tweet info from twitter
  				if(err){
- 					// console.log(err);
+ 					console.log(err);
  				}else {
 
  				var embedCode = JSON.parse(body);//this allows us to dig into the tweet embed data
- 					console.log(embedCode);
+ 					
  					embedHTML.push(embedCode.html);
 
- 					if (embedHTML.length === 10){
+ 					if (embedHTML.length === 10){//this waits for the embed array to be full before showing on the page.
  					var html = {
  						tweets: embedHTML,
  						session: req.session
+
  					};
- 					console.log(embedHTML);
+ 					
 					res.json(html);
 				}
 				

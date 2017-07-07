@@ -158,11 +158,7 @@ $("#account-submit-button").click(function() {
 	};
 });
 
-
-//function to make history list drag sortable
-
 // function to make history list drag sortable
-
 $(function() {
     $("#sortable").sortable({
       revert: true,
