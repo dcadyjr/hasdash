@@ -41,7 +41,7 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 
 	var embedHTML = [];
 
-	twitter.getSearch({'q': "#" + req.body.tag,'count': 5}, function(){} , function(data){//this is the search to get tweet data.
+	twitter.getSearch({'q': "#" + req.body.tag + "&-filter:nativeretweets",'count': 10}, function(){} , function(data){//this is the search to get tweet data.
 			
 		tweets = JSON.parse(data);//this allows us to dig into the tweet data
 
@@ -50,6 +50,8 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 			var userScreenName = tweets.statuses[i].user.screen_name;//variable to hold the UserScreenName
 			var tweetId = tweets.statuses[i].id_str;//variable to hold the tweet Id
 		
+			console.log(userScreenName);
+			console.log(tweetId);
 			//this url sends us code to embed the tweet on our page
 			var url = 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2F' + userScreenName + '%2Fstatus%2F' + tweetId;
 
@@ -59,14 +61,15 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
  				}else {
 
  				var embedCode = JSON.parse(body);//this allows us to dig into the tweet embed data
- 					
+ 					console.log(embedCode);
  					embedHTML.push(embedCode.html);
 
- 					if (embedHTML.length === 5){
+ 					if (embedHTML.length === 10){
  					var html = {
  						tweets: embedHTML,
  						session: req.session
  					};
+ 					console.log(embedHTML);
 					res.json(html);
 				}
 				
