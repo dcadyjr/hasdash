@@ -30,9 +30,11 @@ var requestHashtag = function(hashtag) {
 	$(".grid-item").remove();
 	var tag = hashtag
 	var userId = $("body").attr("id");
+	var timestamp = $.now();
 	var data = {
 		tag: tag,
-		userId: userId
+		userId: userId,
+		timestamp: timestamp
 	};
 	$.ajax({
 		method: "POST",
@@ -73,7 +75,7 @@ $("#get-tweets-button").click(function(){
 
 
 // get tweets when you click on a hashtag in the sidebar
-$(".taglist").click(function(e) {
+$(".taglist a").not(".taglist span a").click(function(e) {
 	e.preventDefault();
 	$(".off-canvas").removeClass("vis"); // hide sidebar on mobile
 	var hashtag = $(this).text();
@@ -158,15 +160,51 @@ $("#account-submit-button").click(function() {
 	};
 });
 
+
 // function to make history list drag sortable
 $(function() {
     $("#sortable").sortable({
       revert: true,
-      helper: 'clone'
+      helper: 'clone',
+      update: function() {
+      	var hashtagsArray = [];
+      	$("#sortable .taglist").each(function(i) {
+      		var thisId = $(this).attr("id");
+      		var thisPosition = i + 1;
+      		hashtagsArray.push({id: thisId, position: thisPosition});
+      	});
+      	var data = {hashtags: hashtagsArray}
+      	$.ajax({
+			method: "PATCH",
+			url: "http://localhost:3000/hashtags/update-order",
+			data: data,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+      }
     });
  
     $("ul, li").disableSelection();
   } );
+
+$(".taglist .hover-option a").on("click", function(e) {
+	e.preventDefault();
+	var thisHashId = $(this).parent().parent().attr("id");
+	if ($(this).text() === "save") {
+		var data = {saved: true}
+	} else {
+		var data = {saved: false}
+	};
+	$.ajax({
+			method: "PATCH",
+			url: "http://localhost:3000/hashtags/" + thisHashId,
+			data: data,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+})
 
 
 

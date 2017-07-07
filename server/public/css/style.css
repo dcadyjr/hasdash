@@ -164,6 +164,21 @@ nav .nav-right a {
     flex-direction: column;
   }
 }
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  margin: 0 0 .5rem .5rem;
+  padding: 0;
+  list-style: none;
+}
+.taglist .hover-option {
+  display: none;
+}
+.taglist:hover .hover-option {
+  display: inline;
+}
 .masonry-grid:after {
   content: '';
   display: block;

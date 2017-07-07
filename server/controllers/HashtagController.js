@@ -24,6 +24,19 @@ router.post("/search", function(req, res){
 
 			tag.save();//saves the hashtag to the db.
 
+		var tag = new Hashtag({ 
+		name: req.body.tag,
+		user: req.body.userId,
+		timestamp: req.body.timestamp
+		})
+
+		tag.save();
+
+		//saves hashtag to the user in d
+		User.findById(req.body.userId, function(error, user){
+
+			var tagId = tag.id;
+
 			//saves hashtag to the user in db
 			User.findById(req.body.userId, function(error, user){
 
@@ -32,7 +45,7 @@ router.post("/search", function(req, res){
 				user.save();//saves the hashtag to the user in the db
 			})
 		}
-	} )
+	})
 
 	var embedHTML = [];//array to hold the blockguote code from twitter to display embedded tweets
 
@@ -65,7 +78,7 @@ router.post("/search", function(req, res){
  					};
  					
 					res.json(html);
-				}
+				 }
 				
  				}
  			})
@@ -73,6 +86,25 @@ router.post("/search", function(req, res){
 			
 	})
 })
+
+// write new positions for saved tags to the database
+router.patch("/update-order", function(req, res) {
+	var ticker = 0;
+	var loopArray = function() {
+	    Hashtag.findById(req.body.hashtags[ticker].id, function(err, hashtag) {
+			hashtag.savedPosition = req.body.hashtags[ticker].position;
+			hashtag.save();
+			console.log(hashtag);
+			ticker++;
+			if(ticker < req.body.hashtags.length) {
+	            loopArray();   
+	        } else {
+	        	res.json("updated");
+	        }
+		});
+    };
+    loopArray();
+});
 
 router.get("/", function(req, res) {
 	Hashtag.find(function(err, hashtags) {
@@ -91,6 +123,7 @@ router.post("/", function(req, res) {
 	var hashtag = new Hashtag({
 		name: req.body.name,
 		user: req.body.user,
+		timestamp: req.body.timestamp
 	});
 	hashtag.save();
 	User.findById(hashtag.user, function(err, user) {
@@ -124,5 +157,17 @@ router.delete("/:id", function(req, res) {
 		res.json("success");
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

@@ -89,11 +89,21 @@ router.get("/listofusers", function(req, res) {
 
 router.get("/:id", function(req, res) {
 	if (req.session.loggedIn === true) {
-		User.findById(req.params.id).populate("hashtags").exec(function(err, user) {
+		User.findById(req.params.id).populate({path: "hashtags", options: { sort: { timestamp: -1 }}}).exec(function(err, user) {
 			var renderObject = {
 				user: user,
 				session: req.session
 			};
+			renderObject.user.savedHashtags = [];
+			for (var i = 0; i < renderObject.user.hashtags.length; i++) {
+				if (renderObject.user.hashtags[i].saved) {
+					renderObject.user.savedHashtags.push(renderObject.user.hashtags[i]);
+				};
+				renderObject.user.savedHashtags.sort(function (a, b) {
+					return a.savedPosition - b.savedPosition;
+				});
+			};
+			renderObject.user.hashtags = renderObject.user.hashtags.slice(0, 10);
 			res.render("dashboard", renderObject)
 		});
 	} else {
