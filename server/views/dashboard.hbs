@@ -1,5 +1,6 @@
 <p class="intro">Welcome back, {{user.name}}!</p>
 
+
 <div class="hashes-wrapper">
 	<div id="hashtory">
 		<form>
@@ -7,9 +8,9 @@
 			<button type="button" id="get-tweets-button">Submit</button>
 		</form>
 		<h3>Hashtory</h3>
-		<ul class="sortable">
+		<ul id="sortable">
 			{{#each user.hashtags}}
-				<li class="taglist"><a href="#">{{this.name}}</a></li>
+				<li class="taglist ui-state-default"><a href="#">{{this.name}}</a></li>
 			{{/each}}
 		</ul>
 	</div>

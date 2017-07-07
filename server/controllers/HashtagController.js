@@ -38,8 +38,7 @@ Hashtag.find({name: req.body.tag, user: req.body.userId}, function(error, hashta
 } )
 	
 // saves the hashtag to the db with the userId
-	
-	
+
 	var embedHTML = [];
 
 	twitter.getSearch({'q': "#" + req.body.tag,'count': 5}, function(){} , function(data){//this is the search to get tweet data.

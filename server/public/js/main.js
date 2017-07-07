@@ -157,3 +157,24 @@ $("#account-submit-button").click(function() {
 	};
 });
 
+//function to make history list drag sortable
+$(function() {
+    $("#sortable").sortable({
+      revert: true,
+      helper: 'clone'
+    });
+ 
+    $("ul, li").disableSelection();
+  } );
+
+
+
+
+
+
+
+
+
+
+
+
