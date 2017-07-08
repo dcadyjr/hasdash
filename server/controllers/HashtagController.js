@@ -45,7 +45,7 @@ router.post("/search", function(req, res){
 
 	var embedHTML = [];//array to hold the blockguote code from twitter to display embedded tweets
 
-	twitter.getSearch({'q': "#" + req.body.tag + "&-filter:nativeretweets",'count': 10}, function(){} , function(data){//this is the search to get tweet data.
+	twitter.getSearch({'q': "#" + req.body.tag + "&-filter:nativeretweets",'count': 20}, function(){} , function(data){//this is the search to get tweet data.
 			
 		tweets = JSON.parse(data);//this allows us to dig into the tweet data
 

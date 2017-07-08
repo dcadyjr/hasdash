@@ -47,14 +47,12 @@ var requestHashtag = function(hashtag) {
 				$('.masonry-grid').append("<div class='grid-item'>" + response.tweets[i] + "</div>");
 			};
 			// after widgets load, refresh masonry to reposition items
-			twttr.ready(function(twttr) {
-				twttr.events.bind('loaded', function (event) {
-					console.log("ok");
-					$('.masonry-grid').masonry("destroy").masonry({
-						itemSelector: '.grid-item',
-						columnWidth: '.grid-sizer',
-						percentPosition: true
-					});
+			twttr.events.bind('loaded', function (event) {
+				console.log("ok");
+				$('.masonry-grid').masonry("destroy").masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true
 				});
 			});
 		}
