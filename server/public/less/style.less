@@ -26,6 +26,15 @@ p {
 
 a {
 	color: @font-color;
+	text-decoration: none !important;
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @font-color 50%);
+  	background-repeat: repeat-x;
+   	background-size: 2px 2px;
+   	background-position: 0px 15px;
+	&:hover {
+		background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @disabled-color 50%);
+		color: @disabled-color;
+    }
 }
 
 label {
@@ -104,17 +113,6 @@ nav {
 		display: inline-block;
 		margin: 0;
 	}
-	a {
-		text-decoration: none !important;
-		background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @font-color 50%);
-	  	background-repeat: repeat-x;
-	   	background-size: 2px 2px;
-	   	background-position: 0px 15px;
-		&:hover {
-			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @disabled-color 50%);
-			color: @disabled-color;
-	    }
-	}
 	.nav-right {
 		float: right;
 		a {
@@ -187,6 +185,14 @@ ul {
 .taglist {
 	.hover-option {
 		display: none;
+		@media only screen and (max-width: 30rem) {
+			display: inline;
+			color: @disabled-color;
+			a {
+				color: @disabled-color;
+				background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, @disabled-color 50%);
+			}
+		}
 	}
 	&:hover .hover-option {
 		display: inline;

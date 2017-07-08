@@ -18,6 +18,15 @@ p.intro {
 }
 a {
   color: #14171a;
+  text-decoration: none !important;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #14171a 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0px 15px;
+}
+a:hover {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #657786 50%);
+  color: #657786;
 }
 label {
   display: block;
@@ -95,17 +104,6 @@ nav h1 {
   display: inline-block;
   margin: 0;
 }
-nav a {
-  text-decoration: none !important;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #14171a 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0px 15px;
-}
-nav a:hover {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #657786 50%);
-  color: #657786;
-}
 nav .nav-right {
   float: right;
 }
@@ -175,6 +173,16 @@ ul li {
 }
 .taglist .hover-option {
   display: none;
+}
+@media only screen and (max-width: 30rem) {
+  .taglist .hover-option {
+    display: inline;
+    color: #657786;
+  }
+  .taglist .hover-option a {
+    color: #657786;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #657786 50%);
+  }
 }
 .taglist:hover .hover-option {
   display: inline;

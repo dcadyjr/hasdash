@@ -33,7 +33,14 @@ router.post("/search", function(req, res){
 				user.hashtags.push(tagId);
 				user.save();//saves the hashtag to the user in the db
 			})
-		}
+		} else {
+			// if hashtag already exists, update the timestamp so it shows in history
+			for (var i = 0; i < hashtags.length; i++) {
+				hashtags[i].timestamp = req.body.timestamp;
+				hashtags[i].save();
+				console.log(hashtags[i]);
+			};
+		};
 	})
 
 	var embedHTML = [];//array to hold the blockguote code from twitter to display embedded tweets
@@ -123,22 +130,11 @@ router.post("/", function(req, res) {
 });
 
 router.patch("/:id", function(req, res) {
-	if (req.body.password) {
-		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			req.body.password = hash;
-			Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
-				Hashtag.findById(req.params.id, function(err, hashtag) {
-					res.json(hashtag);
-				});
-			});
-		})
-	} else {
-		Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
-			Hashtag.findById(req.params.id, function(err, hashtag) {
-				res.json(hashtag);
-			});
+	Hashtag.update({_id: req.params.id}, req.body, function(err, hashtag) {
+		Hashtag.findById(req.params.id, function(err, hashtag) {
+			res.json(hashtag);
 		});
-	};
+	});
 });
 
 router.delete("/:id", function(req, res) {

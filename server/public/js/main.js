@@ -49,6 +49,7 @@ var requestHashtag = function(hashtag) {
 			// after widgets load, refresh masonry to reposition items
 			twttr.ready(function(twttr) {
 				twttr.events.bind('loaded', function (event) {
+					console.log("ok");
 					$('.masonry-grid').masonry("destroy").masonry({
 						itemSelector: '.grid-item',
 						columnWidth: '.grid-sizer',
@@ -77,13 +78,17 @@ $("#get-tweets-button").click(function(){
 
 
 // get tweets when you click on a hashtag in the sidebar
-$(".taglist a").not(".taglist span a").click(function(e) {
-	e.preventDefault();
-	$(".off-canvas").removeClass("vis"); // hide sidebar on mobile
-	var hashtag = $(this).text();
-	requestHashtag(hashtag);
-	console.log(hashtag)
-})
+var getSidebarTweets = function() {
+	$(".taglist a").not(".taglist span a").click(function(e) {
+		e.preventDefault();
+		$(".off-canvas").removeClass("vis"); // hide sidebar on mobile
+		var hashtag = $(this).text();
+		requestHashtag(hashtag);
+		console.log(hashtag)
+	})
+};
+
+getSidebarTweets();
 
 
 
@@ -162,6 +167,25 @@ $("#account-submit-button").click(function() {
 	};
 });
 
+// request to update order
+var updateOrder = function() {
+  	var hashtagsArray = [];
+  	$("#sortable .taglist").each(function(i) {
+  		var thisId = $(this).attr("id");
+  		var thisPosition = i + 1;
+  		hashtagsArray.push({id: thisId, position: thisPosition});
+  	});
+  	var data = {hashtags: hashtagsArray}
+  	$.ajax({
+		method: "PATCH",
+		url: "http://localhost:3000/hashtags/update-order",
+		data: data,
+		success: function(response) {
+			console.log(response);
+		}
+	});
+}
+
 
 // function to make history list drag sortable
 $(function() {
@@ -170,21 +194,7 @@ $(function() {
       helper: 'clone',
       // when it updates send a request to update the hashtag order in the database
       update: function() {
-      	var hashtagsArray = [];
-      	$("#sortable .taglist").each(function(i) {
-      		var thisId = $(this).attr("id");
-      		var thisPosition = i + 1;
-      		hashtagsArray.push({id: thisId, position: thisPosition});
-      	});
-      	var data = {hashtags: hashtagsArray}
-      	$.ajax({
-			method: "PATCH",
-			url: "http://localhost:3000/hashtags/update-order",
-			data: data,
-			success: function(response) {
-				console.log(response);
-			}
-		});
+      	updateOrder();
       }
     });
  
@@ -192,15 +202,26 @@ $(function() {
   } );
 
 // save and unsave hashtags
-$(".taglist .hover-option a").on("click", function(e) {
-	e.preventDefault();
-	var thisHashId = $(this).parent().parent().attr("id");
-	if ($(this).text() === "save") {
-		var data = {saved: true}
-	} else {
-		var data = {saved: false}
-	};
-	$.ajax({
+var saveHandlers = function() {
+	$(".taglist .hover-option a").on("click", function(e) {
+		e.preventDefault();
+		var thisHashId = $(this).parent().parent().attr("id");
+		if ($(this).text() === "save") {
+			var data = {saved: true};
+			// write to DOM if it's not there already
+			if ($("#sortable #" + thisHashId).length === 0) {
+				var thisName = $("#" + thisHashId + " a").not(".hover-option a").text();
+				$("#sortable").append('<li class="taglist ui-state-default ui-sortable-handle" id="' + thisHashId + '"><a href="#">' + thisName + '</a> <span class="hover-option">(<a href="#">unsave</a>)</span></li>');
+				// reattach click handlers so they cover the new DOM element
+				saveHandlers();
+				getSidebarTweets();				
+			}
+		} else {
+			var data = {saved: false}
+			// remove from DOM
+			$("#sortable #" + thisHashId).remove();
+		};
+		$.ajax({
 			method: "PATCH",
 			url: "http://localhost:3000/hashtags/" + thisHashId,
 			data: data,
@@ -208,7 +229,11 @@ $(".taglist .hover-option a").on("click", function(e) {
 				console.log(response);
 			}
 		});
-})
+		updateOrder();
+	})
+};
+
+saveHandlers();
 
 
 
