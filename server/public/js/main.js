@@ -38,7 +38,7 @@ var requestHashtag = function(hashtag) {
 	};
 	$.ajax({
 		method: "POST",
-		url: "http://localhost:3000/hashtags/search",
+		url: "./hashtags/search",
 		data: data,
 		success: function(response) {
 			console.log(response);
@@ -103,7 +103,7 @@ $("#sign-up").click(function() {
 		};
 		$.ajax({
 			method: "POST",
-			url: "http://localhost:3000/users",
+			url: "./users",
 			data: newUser,
 			success: function(response) {
 				if (response.id) {
@@ -128,7 +128,7 @@ $("#login-button").click(function() {
 	};
 	$.ajax({
 		method: "POST",
-		url: "http://localhost:3000/users/login",
+		url: "./users/login",
 		data: user,
 		success: function(response) {
 			if (response.id) {
@@ -154,7 +154,7 @@ $("#account-submit-button").click(function() {
 		};
 		$.ajax({
 			method: "PATCH",
-			url: "http://localhost:3000/users/" + myId,
+			url: "./users/" + myId,
 			data: editedUser,
 			success: function(response) {
 				window.location.href = "/users/account";
@@ -176,7 +176,7 @@ var updateOrder = function() {
   	var data = {hashtags: hashtagsArray}
   	$.ajax({
 		method: "PATCH",
-		url: "http://localhost:3000/hashtags/update-order",
+		url: "./hashtags/update-order",
 		data: data,
 		success: function(response) {
 			console.log(response);
@@ -221,7 +221,7 @@ var saveHandlers = function() {
 		};
 		$.ajax({
 			method: "PATCH",
-			url: "http://localhost:3000/hashtags/" + thisHashId,
+			url: "./hashtags/" + thisHashId,
 			data: data,
 			success: function(response) {
 				console.log(response);
