@@ -6,6 +6,8 @@ var express = require("express"),
 	session = require("express-session"),
 	path = require("path");
 
+var port_number = server.listen(process.env.PORT || 3000);
+
 require("./db/db");
 
 app.use(session({
@@ -36,6 +38,6 @@ app.get("/", function(req, res) {
 	}
 });
 
-server.listen(3000, function(){
-	console.log("Listening on 3000!!")
+server.listen(port_number, function(){
+	console.log("Listening on" + port_number)
 });
