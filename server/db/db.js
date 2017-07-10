@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 var mongoose = require("mongoose");
-var connectionString = "mongodb://localhost/hashdash";
+var connectionString = process.env.DB_HOST;
 
 mongoose.connect(connectionString);
 
